@@ -1,5 +1,11 @@
+import TestUI from "./TestUI";
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      <TestUI />
+    </div>
+  );
 };
 
 export default App;

@@ -119,3 +119,8 @@ export const ROUTES = {
   ADMIN_REVIEWS: "/admin/reviews",
   ADMIN_PROMOTIONS: "/admin/promotions",
 };
+
+// Image Placeholder
+export const PLACEHOLDER_IMAGE = "https://placehold.co/600x400?text=Image";
+export const PLACEHOLDER_AVATAR = "https://placehold.co/400x400?text=Avatar";
+export const PLACEHOLDER_PRODUCT = "https://placehold.co/600x400?text=Product";
