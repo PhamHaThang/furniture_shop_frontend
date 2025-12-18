@@ -1,68 +1,50 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@theme {
+  --font-display: "Nunito", sans-serif;
+  /* Primary - Terracotta */
+  --color-primary-50: #faf3f0;
+  --color-primary-100: #eed7cc;
+  --color-primary-200: #e0bbaa;
+  --color-primary-300: #d19f89;
+  --color-primary-400: #c2846a;
+  --color-primary-500: #b06a4c;
+  --color-primary-600: #8c5740;
+  --color-primary-700: #6a4333;
+  --color-primary-800: #482f25;
+  --color-primary-900: #281b15;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  /* Charcoal (text / contrast) */
+  --color-char-50: #f5f5f5;
+  --color-char-100: #dddddd;
+  --color-char-200: #c5c5c5;
+  --color-char-300: #adadad;
+  --color-char-400: #969696;
+  --color-char-500: #7e7e7e;
+  --color-char-600: #666666;
+  --color-char-700: #4e4e4e;
+  --color-char-800: #363636;
+  --color-char-900: #1f1f1f;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  /* Beige (background / surfaces)*/
+  --color-beige-50: #f8f5f2;
+  --color-beige-100: #e6dfd4;
+  --color-beige-200: #d4c8b6;
+  --color-beige-300: #c1b29a;
+  --color-beige-400: #ae9b7d;
+  --color-beige-500: #998462;
+  --color-beige-600: #7b6b51;
+  --color-beige-700: #5d523f;
+  --color-beige-800: #40392d;
+  --color-beige-900: #242019;
 }
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  html {
+    font-family: var(--font-display);
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  body {
+    background-color: var(--color-beige-50);
+    color: var(--color-char-900);
   }
 }
