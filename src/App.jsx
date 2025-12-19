@@ -21,6 +21,7 @@ import {
   TermsPage,
   WishlistPage,
   BrandsPage,
+  CategoriesPage,
 } from "./pages";
 import TestUI from "./TestUI";
 const App = () => {
@@ -45,6 +46,8 @@ const App = () => {
         <Route index element={<HomePage />} />
         <Route path="products" element={<ProductsPage />} />
         <Route path="products/:slug" element={<ProductDetailPage />} />
+        <Route path="categories" element={<CategoriesPage />} />
+        <Route path="categories/:slug" element={<ProductsPage />} />
         <Route path="brands" element={<BrandsPage />} />
         <Route path="brands/:slug" element={<ProductsPage />} />
         {/* Static routes */}

@@ -11,6 +11,8 @@ export { HomePage } from "./Home";
 export { ProductsPage, ProductDetailPage } from "./Products";
 // Brands
 export { BrandsPage } from "./Brands";
+// Categories
+export { CategoriesPage } from "./Categories";
 // Admin
 export { AdminDashboardPage } from "./Admin";
 // Wishlist

@@ -53,14 +53,26 @@ const HomePage = () => {
   return (
     <div className="space-y-16 pb-16">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-beige-100 to-beige-200 py-20 lg:py-32">
-        <div className="container mx-auto px-4">
+      <section className="relative py-20 lg:py-32 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://res.cloudinary.com/drgho551x/image/upload/v1764945194/furniture-shop/images/thir6c7dvatimkqnijlx.jpg"
+            alt="Hero Section Background"
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-char-900/75 via-char-900/45 to-transparent" />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl">
-            <h1 className="text-4xl lg:text-6xl font-bold text-char-900 mb-6">
+            <h1 className="text-4xl lg:text-6xl font-bold text-beige-50 mb-6 drop-shadow-lg">
               Nội thất hiện đại cho
-              <span className="text-primary-500"> ngôi nhà của bạn</span>
+              <span className="text-primary-400"> ngôi nhà của bạn</span>
             </h1>
-            <p className="text-lg text-char-600 mb-8">
+
+            <p className="text-lg text-beige-100 mb-8 drop-shadow">
               Khám phá bộ sưu tập nội thất cao cấp với thiết kế tinh tế, chất
               lượng vượt trội và giá cả hợp lý.
             </p>
@@ -72,7 +84,10 @@ const HomePage = () => {
                 </Button>
               </Link>
               <Link to={ROUTES.CATEGORIES}>
-                <Button variant="outline" size="lg">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="text-white border-white/70 hover:border-white hover:bg-white/10">
                   Xem danh mục
                 </Button>
               </Link>
@@ -164,20 +179,34 @@ const HomePage = () => {
       )}
       {/* Banner */}
       <section className="container mx-auto px-4">
-        <div className="bg-primary-500 rounded-2xl p-8 lg:p-16 text-center text-white">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Giảm giá đến 50%
-          </h2>
-          <p className="text-white/90 mb-8 max-w-2xl mx-auto">
-            Ưu đãi đặc biệt cho bộ sưu tập nội thất phòng khách. Số lượng có
-            hạn, đặt hàng ngay!
-          </p>
-          <Link to={ROUTES.PRODUCTS}>
-            <Button variant="secondary" size="lg">
-              Mua ngay
-              <ArrowRight className="ml-2" size={20} />
-            </Button>
-          </Link>
+        <div className="relative rounded-2xl p-8 lg:p-16 text-center text-white overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src="https://res.cloudinary.com/drgho551x/image/upload/v1764945194/furniture-shop/images/thir6c7dvatimkqnijlx.jpg"
+              alt="Sale banner background"
+              className="w-full h-full object-cover"
+            />
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-char-900/70 via-primary-600/50 to-primary-500/40" />
+          </div>
+
+          <div className="relative z-10">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-beige-50 drop-shadow-lg">
+              Giảm giá đến 50%
+            </h2>
+
+            <p className="text-beige-50 mb-8 max-w-2xl mx-auto drop-shadow">
+              Ưu đãi đặc biệt cho bộ sưu tập nội thất phòng khách. Số lượng có
+              hạn, đặt hàng ngay!
+            </p>
+            <Link to={ROUTES.PRODUCTS}>
+              <Button variant="secondary" size="lg">
+                Mua ngay
+                <ArrowRight className="ml-2" size={20} />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
       {/* New Arrivals */}
