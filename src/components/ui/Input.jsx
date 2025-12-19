@@ -39,7 +39,7 @@ const Input = forwardRef(
             ref={ref}
             type={inputType}
             className={`
-              w-full px-4 py-2.5 rounded-lg border transition-all duration-200
+              w-full px-4 py-2 rounded-lg border transition-all duration-200
               bg-white text-char-900 placeholder:text-char-400
               focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-500
               disabled:bg-beige-100 disabled:cursor-not-allowed

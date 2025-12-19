@@ -267,3 +267,13 @@ export const FEATURE_HIGHLIGHTS = [
     desc: "Hoàn tiền 100%",
   },
 ];
+// SORT OPTIONS
+export const SORT_OPTIONS = [
+  { value: "newest", label: "Mới nhất" },
+  { value: "oldest", label: "Cũ nhất" },
+  { value: "price-asc", label: "Giá tăng dần" },
+  { value: "price-desc", label: "Giá giảm dần" },
+  { value: "name-asc", label: "Tên A-Z" },
+  { value: "name-desc", label: "Tên Z-A" },
+  { value: "best-seller", label: "Bán chạy" },
+];

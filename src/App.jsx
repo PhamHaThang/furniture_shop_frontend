@@ -15,9 +15,12 @@ import {
   RegisterPage,
   ForgotPasswordPage,
   ResetPasswordPage,
+  ProductsPage,
+  ProductDetailPage,
+  OrderTrackingPage,
+  TermsPage,
 } from "./pages";
 import TestUI from "./TestUI";
-import { OrderTrackingPage, TermsPage } from "./pages/Static";
 const App = () => {
   return (
     <Routes>
@@ -38,6 +41,8 @@ const App = () => {
       <Route path="/" element={<MainLayout />}>
         {/* Public routes */}
         <Route index element={<HomePage />} />
+        <Route path="products" element={<ProductsPage />} />
+        <Route path="products/:slug" element={<ProductDetailPage />} />
         {/* Static routes */}
         <Route path="order-tracking" element={<OrderTrackingPage />} />
         <Route path="guide" element={<GuidePage />} />

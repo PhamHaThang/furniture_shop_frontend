@@ -7,6 +7,8 @@ export {
 } from "./Auth";
 // Home
 export { HomePage } from "./Home";
+// Products
+export { ProductsPage, ProductDetailPage } from "./Products";
 // Admin
 export { AdminDashboardPage } from "./Admin";
 
