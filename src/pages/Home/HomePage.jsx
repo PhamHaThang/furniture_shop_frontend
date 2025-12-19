@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { ProductCard, Button, Spinner } from "../../components/ui";
+import { ProductCard, Button, LoadingScreen } from "../../components/ui";
 import { productService, categoryService, brandService } from "../../services";
 import { FEATURE_HIGHLIGHTS, ROUTES } from "../../config";
 
@@ -48,11 +48,7 @@ const HomePage = () => {
     fetchData();
   }, []);
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Spinner size="xl" />
-      </div>
-    );
+    return <LoadingScreen />;
   }
   return (
     <div className="space-y-16 pb-16">

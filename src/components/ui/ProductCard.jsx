@@ -112,17 +112,15 @@ const ProductCard = ({ product, horizontal = false }) => {
             )}
 
             {/* Rating */}
-            {product.totalReviews > 0 && (
-              <div className="flex items-center gap-1 mb-2">
-                <Star size={14} className="text-yellow-400 fill-yellow-400" />
-                <span className="text-sm font-medium text-char-700">
-                  {product.averageRating?.toFixed(1)}
-                </span>
-                <span className="text-sm text-char-500">
-                  ({product.totalReviews} đánh giá)
-                </span>
-              </div>
-            )}
+            <div className="flex items-center gap-1 mb-2">
+              <Star size={14} className="text-yellow-400 fill-yellow-400" />
+              <span className="text-sm font-medium text-char-700">
+                {product.averageRating?.toFixed(1)}
+              </span>
+              <span className="text-sm text-char-500">
+                ({product.totalReviews} đánh giá)
+              </span>
+            </div>
           </div>
 
           {/* Bottom Section */}
@@ -138,7 +136,7 @@ const ProductCard = ({ product, horizontal = false }) => {
                 onClick={handleToggleWishlist}
                 className={`p-2 rounded-full border transition-colors cursor-pointer ${
                   inWishlist
-                    ? "bg-red-500 text-white border-red-500"
+                    ? "bg-red-500 text-white border-red-500 hover:bg-red-600"
                     : "border-beige-300 text-char-600 hover:bg-primary-500 hover:text-white hover:border-primary-500"
                 }`}>
                 <Heart size={18} fill={inWishlist ? "currentColor" : "none"} />
@@ -169,12 +167,12 @@ const ProductCard = ({ product, horizontal = false }) => {
         />
 
         {/* Quick Actions */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute top-3 right-3 flex flex-col gap-2 duration-300">
           <button
             onClick={handleToggleWishlist}
             className={`p-2 rounded-full shadow-md transition-colors cursor-pointer ${
               inWishlist
-                ? "bg-red-500 text-white"
+                ? "bg-red-500 text-white hover:bg-red-600"
                 : "bg-white text-char-600 hover:bg-primary-500 hover:text-white"
             }`}>
             <Heart size={18} fill={inWishlist ? "currentColor" : "none"} />
@@ -224,19 +222,16 @@ const ProductCard = ({ product, horizontal = false }) => {
         <h3 className="font-medium text-char-900 mb-2 line-clamp-2 group-hover:text-primary-500 transition-colors">
           {product.name}
         </h3>
-
         {/* Rating */}
-        {product.totalReviews > 0 && (
-          <div className="flex items-center gap-1 mb-2">
-            <Star size={14} className="text-yellow-400 fill-yellow-400" />
-            <span className="text-sm font-medium text-char-700">
-              {product.averageRating?.toFixed(1)}
-            </span>
-            <span className="text-sm text-char-500">
-              ({product.totalReviews})
-            </span>
-          </div>
-        )}
+        <div className="flex items-center gap-1 mb-2">
+          <Star size={14} className="text-yellow-400 fill-yellow-400" />
+          <span className="text-sm font-medium text-char-700">
+            {product.averageRating?.toFixed(1)}
+          </span>
+          <span className="text-sm text-char-500">
+            ({product.totalReviews})
+          </span>
+        </div>
 
         {/* Price */}
         <div className="flex items-center gap-2">

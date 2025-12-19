@@ -19,6 +19,7 @@ import {
   ProductDetailPage,
   OrderTrackingPage,
   TermsPage,
+  WishlistPage,
 } from "./pages";
 import TestUI from "./TestUI";
 const App = () => {
@@ -53,7 +54,9 @@ const App = () => {
         <Route path="terms" element={<TermsPage />} />
         <Route path="privacy" element={<PrivacyPage />} />
         {/* Protected routes */}
-
+        <Route element={<ProtectedRoute />}>
+          <Route path="wishlist" element={<WishlistPage />} />
+        </Route>
         <Route path="testUI" element={<TestUI />} />
         {/* Not found routes */}
         <Route path="*" element={<NotFoundPage />} />

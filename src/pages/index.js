@@ -11,7 +11,8 @@ export { HomePage } from "./Home";
 export { ProductsPage, ProductDetailPage } from "./Products";
 // Admin
 export { AdminDashboardPage } from "./Admin";
-
+// Wishlist
+export { WishlistPage } from "./Wishlist";
 // Static Pages
 export {
   OrderTrackingPage,

@@ -2,11 +2,9 @@ import Spinner from "./Spinner";
 
 const LoadingScreen = ({ message = "Đang tải..." }) => {
   return (
-    <div className="fixed inset-0 bg-beige-50 flex items-center justify-center z-50">
-      <div className="flex flex-col items-center">
-        <Spinner size="xl" />
-        <p className="mt-4 text-char-600 font-medium">{message}</p>
-      </div>
+    <div className="flex items-center justify-center min-h-[50vh] flex-col gap-4 ">
+      <Spinner size="xl" className="text-primary-600" />
+      <p className="text-char-600 font-medium">{message}</p>
     </div>
   );
 };

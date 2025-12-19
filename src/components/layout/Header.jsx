@@ -123,10 +123,10 @@ const Header = () => {
               <div className="relative">
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="flex items-center gap-2 p-2 text-char-600 hover:text-primary-500 transition-colors">
+                  className="flex items-center gap-2 p-2 text-char-600 hover:text-primary-500 transition-colors cursor-pointer">
                   <User size={24} />
                   <span className="hidden lg:block text-sm font-medium max-w-[100px] truncate">
-                    {user?.fullName}
+                    {user?.fullName.split(" ").slice(-1)[0]}
                   </span>
                   <ChevronDown size={16} className="hidden lg:block" />
                 </button>

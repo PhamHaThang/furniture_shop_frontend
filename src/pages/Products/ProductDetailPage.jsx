@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Button, Spinner, ProductCard } from "../../components/ui";
+import { Button, ProductCard, LoadingScreen } from "../../components/ui";
 import { Breadcrumb, EmptyState } from "../../components/common";
 import { productService, reviewService } from "../../services";
 import { useAuth, useCart, useWishlist } from "../../contexts";
@@ -111,11 +111,7 @@ const ProductDetailPage = () => {
   };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <Spinner size="xl" />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   if (!product) {

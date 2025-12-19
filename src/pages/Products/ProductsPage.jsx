@@ -6,7 +6,13 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { SlidersHorizontal, Grid3X3, LayoutList } from "lucide-react";
-import { ProductCard, Button, Select, Spinner } from "../../components/ui";
+import {
+  ProductCard,
+  Button,
+  Select,
+  Spinner,
+  LoadingScreen,
+} from "../../components/ui";
 import { Pagination, Breadcrumb, EmptyState } from "../../components/common";
 import { FilterSidebar } from "./components";
 import { productService, categoryService, brandService } from "../../services";
@@ -270,9 +276,7 @@ const ProductsPage = () => {
 
           {/* Loading */}
           {loading ? (
-            <div className="flex items-center justify-center py-20">
-              <Spinner size="xl" />
-            </div>
+            <LoadingScreen message="Đang tải sản phẩm..." />
           ) : products.length === 0 ? (
             <EmptyState
               icon={Package}
