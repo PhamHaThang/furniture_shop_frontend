@@ -1,5 +1,6 @@
 import {
   Building2,
+  CheckCircle,
   Clock,
   Facebook,
   FolderTree,
@@ -18,6 +19,7 @@ import {
   Truck,
   Twitter,
   Users,
+  XCircle,
   Youtube,
 } from "lucide-react";
 
@@ -42,6 +44,8 @@ export const PAGINATION_LIMITS = {
 };
 
 // Shipping Fee
+// IF order total is below FREE_SHIPPING_THRESHOLD, SHIPPING_FEE applies
+export const FREE_SHIPPING_THRESHOLD = 5000000; // VND
 export const SHIPPING_FEE = 30000; // VND
 
 // Order Status
@@ -278,3 +282,12 @@ export const SORT_OPTIONS = [
   { value: "name-desc", label: "Tên Z-A" },
   { value: "best-seller", label: "Bán chạy" },
 ];
+
+// STATUS ORDERS MAP
+export const STATUS_ORDERS_MAP = {
+  pending: { label: "Chờ xác nhận", variant: "warning", icon: Clock },
+  processing: { label: "Đang xử lý", variant: "info", icon: Package },
+  shipped: { label: "Đang giao", variant: "primary", icon: Truck },
+  delivered: { label: "Đã giao", variant: "success", icon: CheckCircle },
+  cancelled: { label: "Đã hủy", variant: "danger", icon: XCircle },
+};
