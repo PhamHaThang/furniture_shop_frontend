@@ -9,6 +9,8 @@ export {
 export { HomePage } from "./Home";
 // Products
 export { ProductsPage, ProductDetailPage } from "./Products";
+// Brands
+export { BrandsPage } from "./Brands";
 // Admin
 export { AdminDashboardPage } from "./Admin";
 // Wishlist

@@ -147,6 +147,7 @@ export const ROUTES = {
 // Image Placeholder
 export const PLACEHOLDER_IMAGE = "https://placehold.co/600x400?text=Image";
 export const PLACEHOLDER_AVATAR = "https://placehold.co/400x400?text=Avatar";
+export const PLACEHOLDER_BRAND = "https://placehold.co/200x200?text=Brand";
 export const PLACEHOLDER_PRODUCT = "https://placehold.co/600x400?text=Product";
 
 // Social Media Links
