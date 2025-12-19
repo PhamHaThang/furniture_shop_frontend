@@ -23,6 +23,7 @@ import {
   BrandsPage,
   CategoriesPage,
   PromotionPage,
+  CartPage,
 } from "./pages";
 import TestUI from "./TestUI";
 const App = () => {
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="brands" element={<BrandsPage />} />
         <Route path="brands/:slug" element={<ProductsPage />} />
         <Route path="promotions" element={<PromotionPage />} />
+
         {/* Static routes */}
         <Route path="order-tracking" element={<OrderTrackingPage />} />
         <Route path="guide" element={<GuidePage />} />
@@ -64,6 +66,7 @@ const App = () => {
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="wishlist" element={<WishlistPage />} />
+          <Route path="cart" element={<CartPage />} />
         </Route>
         <Route path="testUI" element={<TestUI />} />
         {/* Not found routes */}

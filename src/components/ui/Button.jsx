@@ -6,7 +6,7 @@ const variants = {
     "bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-300",
   secondary: "bg-char-700 text-white hover:bg-char-800 focus:ring-char-300",
   outline:
-    "border-2 border-primary-500 text-primary-500 hover:bg-primary-50 focus:ring-primary-300",
+    "border-2 border-primary-500 text-primary-500 hover:bg-primary-100 focus:ring-primary-300",
   ghost: "text-char-700 hover:bg-beige-100 focus:ring-beige-300",
   danger: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-300",
 };

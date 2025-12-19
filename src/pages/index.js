@@ -19,6 +19,8 @@ export { AdminDashboardPage } from "./Admin";
 export { WishlistPage } from "./Wishlist";
 // Promotions
 export { PromotionPage } from "./Promotions";
+// Cart and Checkout
+export { CartPage } from "./Cart";
 // Static Pages
 export {
   OrderTrackingPage,

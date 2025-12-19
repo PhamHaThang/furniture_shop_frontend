@@ -4,6 +4,7 @@ import { useAuth, useCart, useWishlist } from "../../contexts";
 import { PLACEHOLDER_IMAGE } from "../../config";
 import { formatPrice } from "../../utils";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const ProductCard = ({ product, horizontal = false }) => {
   const { isAuthenticated } = useAuth();
@@ -14,7 +15,9 @@ const ProductCard = ({ product, horizontal = false }) => {
     isInWishlist,
   } = useWishlist();
   const inWishlist = isInWishlist(product._id);
-  const handleAddToCart = (e) => {
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+
+  const handleAddToCart = async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -23,15 +26,26 @@ const ProductCard = ({ product, horizontal = false }) => {
       return;
     }
 
-    addToCart({
-      _id: product._id,
-      name: product.name,
-      slug: product.slug,
-      price: product.price,
-      image: product.images?.[0],
-      quantity: 1,
-    });
-    toast.success("Đã thêm vào giỏ hàng");
+    if (isAddingToCart) return;
+
+    setIsAddingToCart(true);
+    try {
+      await addToCart({
+        _id: product._id,
+        name: product.name,
+        slug: product.slug,
+        price: product.price,
+        image: product.images?.[0],
+        quantity: 1,
+        stock: product.stock || 0,
+      });
+      toast.success("Đã thêm vào giỏ hàng");
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast.error("Thêm vào giỏ hàng thất bại");
+    } finally {
+      setIsAddingToCart(false);
+    }
   };
   const handleToggleWishlist = (e) => {
     e.preventDefault();
@@ -143,10 +157,14 @@ const ProductCard = ({ product, horizontal = false }) => {
               </button>
               <button
                 onClick={handleAddToCart}
-                disabled={product.stock === 0}
+                disabled={product.stock === 0 || isAddingToCart}
                 className="px-4 py-2 bg-primary-500 text-white font-medium rounded-lg hover:bg-primary-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 cursor-pointer">
                 <ShoppingCart size={18} />
-                {product.stock === 0 ? "Hết hàng" : "Thêm vào giỏ"}
+                {isAddingToCart
+                  ? "Đang thêm..."
+                  : product.stock === 0
+                  ? "Hết hàng"
+                  : "Thêm vào giỏ"}
               </button>
             </div>
           </div>
@@ -183,10 +201,14 @@ const ProductCard = ({ product, horizontal = false }) => {
         <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button
             onClick={handleAddToCart}
-            disabled={product.stock === 0}
+            disabled={product.stock === 0 || isAddingToCart}
             className="w-full py-2 bg-white text-char-900 font-medium rounded-lg hover:bg-primary-500 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer">
             <ShoppingCart size={18} />
-            {product.stock === 0 ? "Hết hàng" : "Thêm vào giỏ"}
+            {isAddingToCart
+              ? "Đang thêm..."
+              : product.stock === 0
+              ? "Hết hàng"
+              : "Thêm vào giỏ"}
           </button>
         </div>
 

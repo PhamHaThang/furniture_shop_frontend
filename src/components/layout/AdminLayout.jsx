@@ -3,6 +3,7 @@ import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo1.png";
 import { useAuth } from "../../contexts";
 import { ADMIN_SIDEBAR_LINKS } from "../../config";
+import { ChevronLeft, LogOut, X, Home, Menu } from "lucide-react";
 const AdminLayout = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -32,11 +33,11 @@ const AdminLayout = () => {
         {/* Logo */}
         <div className="flex items-center justify-between h-16 px-4 border-b border-char-700">
           {isSidebarOpen && (
-            <img src={logo} alt="Logo" className="h-10 object-contain" />
+            <img src={logo} alt="Logo" className="h-8  object-contain" />
           )}
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="hidden lg:flex p-2 rounded-lg hover:bg-char-800 transition-colors">
+            className="hidden lg:flex p-2 rounded-lg hover:bg-char-800 transition-colors cursor-pointer">
             <ChevronLeft
               className={`w-5 h-5 transition-transform ${
                 !isSidebarOpen ? "rotate-180" : ""
@@ -45,7 +46,7 @@ const AdminLayout = () => {
           </button>
           <button
             onClick={() => setIsMobileSidebarOpen(false)}
-            className="lg:hidden p-2 rounded-lg hover:bg-char-800 transition-colors">
+            className="lg:hidden p-2 rounded-lg hover:bg-char-800 transition-colors cursor-pointer">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -87,8 +88,8 @@ const AdminLayout = () => {
           )}
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-gray-300 hover:bg-red-500/20 hover:text-red-400 transition-colors">
-            <LogOut className="w-5 h-5 flex-shrink-0" />
+            className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-gray-300 hover:bg-red-500/20 hover:text-red-400 transition-colors cursor-pointer">
+            <LogOut className="w-5 h-5 flex-shrink-0 " />
             {isSidebarOpen && <span>Đăng xuất</span>}
           </button>
         </div>
@@ -109,7 +110,10 @@ const AdminLayout = () => {
           <div className="flex-1" />
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-600 hidden sm:block">
-              Xin chào, <span className="font-medium">{user?.fullName}</span>
+              Xin chào,{" "}
+              <span className="font-medium">
+                {user.fullName.split(" ").slice(-1)[0]}
+              </span>
             </span>
             {user?.avatar ? (
               <img
@@ -119,7 +123,11 @@ const AdminLayout = () => {
               />
             ) : (
               <div className="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center text-white font-medium">
-                {user?.fullName?.charAt(0)?.toUpperCase()}
+                {user?.fullName
+                  ?.split(" ")
+                  .map((n) => n.charAt(0))
+                  .join("")
+                  .toUpperCase()}
               </div>
             )}
           </div>

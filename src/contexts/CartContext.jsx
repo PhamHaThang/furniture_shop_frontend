@@ -10,6 +10,7 @@ import { cartService } from "../services";
 import { STORAGE_KEYS } from "../config";
 
 const CartContext = createContext(null);
+
 export const CartProvider = ({ children }) => {
   const auth = useAuth();
   const isAuthenticated = auth?.isAuthenticated || false;
@@ -86,13 +87,15 @@ export const CartProvider = ({ children }) => {
     }
   }, [items, isAuthenticated]);
   const addItem = useCallback(
-    (product) => async () => {
+    async (product) => {
       if (!isAuthenticated) return;
       setItems((prevItems) => {
-        const existingItem = prevItems.find((item) => item._id === product._id);
-        if (existingItem >= 0) {
+        const existingIndex = prevItems.findIndex(
+          (item) => item._id === product._id
+        );
+        if (existingIndex !== -1) {
           const newItems = [...prevItems];
-          newItems[existingItem].quantity += product.quantity || 1;
+          newItems[existingIndex].quantity += product.quantity || 1;
           return newItems;
         }
         return [
@@ -108,12 +111,13 @@ export const CartProvider = ({ children }) => {
         await cartService.addToCart(product._id, product.quantity || 1);
       } catch (error) {
         console.error("Lỗi khi thêm sản phẩm vào giỏ hàng:", error);
+        syncWithServer();
       }
     },
-    [isAuthenticated]
+    [isAuthenticated, syncWithServer]
   );
   const removeItem = useCallback(
-    (productId) => async () => {
+    async (productId) => {
       if (!isAuthenticated) return;
       setItems((prevItems) =>
         prevItems.filter((item) => item._id !== productId)
@@ -127,7 +131,7 @@ export const CartProvider = ({ children }) => {
     [isAuthenticated]
   );
   const updateQuantity = useCallback(
-    (productId, quantity) => async () => {
+    async (productId, quantity) => {
       if (!isAuthenticated || quantity < 1) return;
       setItems((prevItems) =>
         prevItems.map((item) =>
@@ -147,19 +151,16 @@ export const CartProvider = ({ children }) => {
     },
     [isAuthenticated]
   );
-  const clearCart = useCallback(
-    () => async () => {
-      if (!isAuthenticated) return;
-      setItems([]);
-      setDiscount(0);
-      try {
-        await cartService.clearCart();
-      } catch (error) {
-        console.error("Lỗi khi xóa giỏ hàng:", error);
-      }
-    },
-    [isAuthenticated]
-  );
+  const clearCart = useCallback(async () => {
+    if (!isAuthenticated) return;
+    setItems([]);
+    setDiscount(0);
+    try {
+      await cartService.clearCart();
+    } catch (error) {
+      console.error("Lỗi khi xóa giỏ hàng:", error);
+    }
+  }, [isAuthenticated]);
   const value = {
     items,
     totalItems,

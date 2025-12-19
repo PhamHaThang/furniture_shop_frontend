@@ -33,7 +33,6 @@ const HomePage = () => {
               limit: 6,
             }),
           ]);
-        console.log(featuredRes);
         setFeaturedProducts(featuredRes.products || []);
         setNewProducts(newRes.products || []);
         setBestSellers(bestSellersRes.products || []);

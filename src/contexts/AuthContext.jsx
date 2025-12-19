@@ -22,19 +22,27 @@ export const AuthProvider = ({ children }) => {
       const savedUser = localStorage.getItem(STORAGE_KEYS.USER);
       if (token && savedUser) {
         try {
+          const parsedUser = JSON.parse(savedUser);
+          setUser(parsedUser);
           const response = await authService.getProfile();
-          setUser(response.data.user);
+          setUser(response.user);
+          localStorage.setItem(
+            STORAGE_KEYS.USER,
+            JSON.stringify(response.user)
+          );
           setIsAuthenticated(true);
-        } catch (error) {
-          console.error("Lỗi khi lấy thông tin user:", error);
+        } catch {
           localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
           localStorage.removeItem(STORAGE_KEYS.USER);
+          setUser(null);
+          setIsAuthenticated(false);
         }
       }
       setIsLoading(false);
     };
     initAuth();
   }, []);
+
   const login = useCallback(async (email, password) => {
     const response = await authService.login({ email, password });
     const { token, user } = response;
