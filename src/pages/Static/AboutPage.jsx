@@ -9,6 +9,7 @@ import {
   Star,
 } from "lucide-react";
 import { Breadcrumb } from "../../components/common";
+import { FEATURE_HIGHLIGHTS } from "../../config";
 
 const AboutPage = () => {
   const stats = [
@@ -41,29 +42,6 @@ const AboutPage = () => {
       icon: Shield,
       title: "Uy tín",
       description: "Xây dựng niềm tin qua từng sản phẩm và dịch vụ chất lượng",
-    },
-  ];
-
-  const features = [
-    {
-      icon: Truck,
-      title: "Giao hàng toàn quốc",
-      description: "Miễn phí vận chuyển cho đơn hàng từ 5.000.000đ",
-    },
-    {
-      icon: Shield,
-      title: "Bảo hành chính hãng",
-      description: "Bảo hành từ 6-24 tháng theo chính sách nhà sản xuất",
-    },
-    {
-      icon: Clock,
-      title: "Hỗ trợ 24/7",
-      description: "Đội ngũ tư vấn luôn sẵn sàng hỗ trợ bạn",
-    },
-    {
-      icon: Star,
-      title: "Đổi trả dễ dàng",
-      description: "Đổi trả trong 7 ngày nếu không hài lòng",
     },
   ];
 
@@ -150,42 +128,43 @@ const AboutPage = () => {
       </div>
 
       {/* Values */}
-      <div className="bg-beige-50 rounded-2xl p-8 md:p-12 mb-16">
+      <div className="mb-16">
         <h2 className="text-3xl font-bold text-char-900 mb-8 text-center">
           Giá trị cốt lõi
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {values.map((value, index) => (
-            <div key={index} className="text-center">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+            <div
+              key={index}
+              className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mb-4">
                 <value.icon className="text-primary-500" size={28} />
               </div>
-              <h3 className="font-semibold text-char-900 mb-2">
+              <h3 className="font-semibold text-char-900 mb-1">
                 {value.title}
               </h3>
-              <p className="text-char-500 text-sm">{value.description}</p>
+              <p className="text-sm text-char-500">{value.description}</p>
             </div>
           ))}
         </div>
       </div>
-
       {/* Features */}
       <div className="mb-16">
         <h2 className="text-3xl font-bold text-char-900 mb-8 text-center">
           Tại sao chọn HOMI Shop?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => (
+          {FEATURE_HIGHLIGHTS.map((feature, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl border border-beige-200 p-6 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <feature.icon className="text-primary-500" size={24} />
+              className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mb-4">
+                <feature.icon className="text-primary-500" size={28} />
               </div>
-              <h3 className="font-semibold text-char-900 mb-2">
+              <h3 className="font-semibold text-char-900 mb-1">
                 {feature.title}
               </h3>
-              <p className="text-char-500 text-sm">{feature.description}</p>
+              <p className="text-sm text-char-500">{feature.desc}</p>
             </div>
           ))}
         </div>

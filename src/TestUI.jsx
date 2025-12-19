@@ -20,7 +20,26 @@ import {
   Textarea,
   LoadingScreen,
   ConfirmModal,
+  ProductCard,
 } from "./components/ui";
+const mockProduct = {
+  _id: "p001",
+  name: "Sofa da cao cấp Scandinavian",
+  slug: "sofa-da-cao-cap",
+  price: 12500000,
+  stock: 3,
+  images: ["https://images.unsplash.com/photo-1586023492125-27b2c045efd7"],
+  category: {
+    name: "Sofa",
+  },
+  brand: {
+    name: "HOMI",
+  },
+  averageRating: 4.5,
+  totalReviews: 32,
+  description: "Sofa da phong cách Bắc Âu, êm ái và sang trọng",
+};
+
 import { useState } from "react";
 const TestUI = () => {
   const [openModal, setOpenModal] = useState(null);
@@ -704,6 +723,33 @@ const TestUI = () => {
         {loading && (
           <LoadingScreen message="Đang tải dữ liệu, vui lòng chờ..." />
         )}
+      </div>
+      {/* ===============ProductCard UI Demo============ */}
+      <div className="p-8 space-y-10 bg-beige-50 min-h-screen">
+        {/* GRID VIEW */}
+        <div>
+          <h2 className="text-xl font-semibold mb-4">
+            ProductCard – Grid view
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <ProductCard product={mockProduct} />
+            <ProductCard product={{ ...mockProduct, _id: "p002" }} />
+            <ProductCard product={{ ...mockProduct, _id: "p003" }} />
+          </div>
+        </div>
+
+        {/* HORIZONTAL VIEW */}
+        <div>
+          <h2 className="text-xl font-semibold mb-4">
+            ProductCard – Horizontal view
+          </h2>
+
+          <div className="space-y-4">
+            <ProductCard product={mockProduct} horizontal />
+            <ProductCard product={{ ...mockProduct, stock: 0 }} horizontal />
+          </div>
+        </div>
       </div>
     </div>
   );

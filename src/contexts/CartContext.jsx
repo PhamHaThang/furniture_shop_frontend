@@ -55,7 +55,7 @@ export const CartProvider = ({ children }) => {
   }, [isAuthenticated]);
   // Load from localStorage only if authenticated
   useEffect(() => {
-    if (!isAuthLoading) return;
+    if (isAuthLoading) return;
     if (isAuthenticated) {
       try {
         const saved = localStorage.getItem(STORAGE_KEYS.CART);
@@ -70,7 +70,7 @@ export const CartProvider = ({ children }) => {
       setDiscount(0);
       localStorage.removeItem(STORAGE_KEYS.CART);
     }
-  }, [isAuthenticated, isAuthLoading, syncWithServer]);
+  }, [isAuthenticated, isAuthLoading]);
 
   // Auto-sync with server when authenticated
   useEffect(() => {

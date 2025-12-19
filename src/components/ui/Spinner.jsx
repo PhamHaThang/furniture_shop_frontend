@@ -8,11 +8,7 @@ const sizes = {
 };
 
 const Spinner = ({ size = "md", className = "" }) => {
-  return (
-    <Loader2
-      className={`animate-spin text-primary-500 ${sizes[size]} ${className}`}
-    />
-  );
+  return <Loader2 className={`animate-spin ${sizes[size]} ${className}`} />;
 };
 
 export default Spinner;

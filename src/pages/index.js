@@ -1,3 +1,12 @@
+// Auth
+export {
+  LoginPage,
+  RegisterPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
+} from "./Auth";
+// Home
+export { HomePage } from "./Home";
 // Admin
 export { AdminDashboardPage } from "./Admin";
 

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { MainLayout, AdminLayout } from "./components/layout";
+import { MainLayout, AdminLayout, AuthLayout } from "./components/layout";
 import { ProtectedRoute } from "./components/common";
 import {
   AboutPage,
@@ -10,13 +10,25 @@ import {
   NotFoundPage,
   PrivacyPage,
   ReturnPolicyPage,
+  HomePage,
+  LoginPage,
+  RegisterPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
 } from "./pages";
-import { HomePage } from "./pages/Home";
 import TestUI from "./TestUI";
 import { OrderTrackingPage, TermsPage } from "./pages/Static";
 const App = () => {
   return (
     <Routes>
+      {/* Auth routes */}
+      <Route element={<AuthLayout />}>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+      </Route>
+
       <Route element={<ProtectedRoute requireAdmin={true} />}>
         {/* Admin routes */}
         <Route path="/admin" element={<AdminLayout />}>

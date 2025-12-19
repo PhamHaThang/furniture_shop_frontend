@@ -3,15 +3,19 @@ import {
   Clock,
   Facebook,
   FolderTree,
+  HeadphonesIcon,
   Instagram,
   LayoutDashboard,
   Mail,
   MapPin,
   Package,
   Phone,
+  RotateCcw,
+  Shield,
   ShoppingCart,
   Star,
   Ticket,
+  Truck,
   Twitter,
   Users,
   Youtube,
@@ -95,6 +99,7 @@ export const STORAGE_KEYS = {
   ACCESS_TOKEN: "accessToken",
   USER: "user",
   CART: "cart",
+  WISHLIST: "wishlist",
 };
 
 // Routes
@@ -237,5 +242,28 @@ export const STORE_LOCATIONS = [
     address: "456 Đường XYZ, Phường Tân Phong, Quận 7, TP.HCM",
     phone: "028 8765 4321",
     hours: "8:00 - 21:00",
+  },
+];
+// Feature Highlights
+export const FEATURE_HIGHLIGHTS = [
+  {
+    icon: Truck,
+    title: "Miễn phí vận chuyển",
+    desc: "Đơn hàng từ 5 triệu",
+  },
+  {
+    icon: Shield,
+    title: "Bảo hành 12 tháng",
+    desc: "Chính sách bảo hành",
+  },
+  {
+    icon: HeadphonesIcon,
+    title: "Hỗ trợ 24/7",
+    desc: "Tư vấn miễn phí",
+  },
+  {
+    icon: RotateCcw,
+    title: "Đổi trả 30 ngày",
+    desc: "Hoàn tiền 100%",
   },
 ];

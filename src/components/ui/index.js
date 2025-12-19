@@ -8,3 +8,4 @@ export { default as Select } from "./Select";
 export { default as Textarea } from "./Textarea";
 export { default as LoadingScreen } from "./LoadingScreen";
 export { default as ConfirmModal } from "./ConfirmModal";
+export { default as ProductCard } from "./ProductCard";
