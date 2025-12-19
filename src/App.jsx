@@ -22,6 +22,7 @@ import {
   WishlistPage,
   BrandsPage,
   CategoriesPage,
+  PromotionPage,
 } from "./pages";
 import TestUI from "./TestUI";
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
         <Route path="categories/:slug" element={<ProductsPage />} />
         <Route path="brands" element={<BrandsPage />} />
         <Route path="brands/:slug" element={<ProductsPage />} />
+        <Route path="promotions" element={<PromotionPage />} />
         {/* Static routes */}
         <Route path="order-tracking" element={<OrderTrackingPage />} />
         <Route path="guide" element={<GuidePage />} />
