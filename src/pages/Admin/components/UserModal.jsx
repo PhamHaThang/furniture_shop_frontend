@@ -120,9 +120,44 @@ const UserModal = ({ isOpen, onClose, user, onSave }) => {
     const newAddress = formData.address.filter((_, i) => i !== index);
     setFormData({ ...formData, address: newAddress });
   };
+  const validateForm = () => {
+    if (!formData.fullName.trim()) {
+      toast.error("Họ tên là bắt buộc.");
+      return false;
+    }
+    if (!formData.email.trim()) {
+      toast.error("Email là bắt buộc.");
+      return false;
+    }
+    if (!user && !formData.password.trim()) {
+      toast.error("Mật khẩu là bắt buộc khi tạo người dùng mới.");
+      return false;
+    } else if (formData.password && formData.password.length < 6) {
+      toast.error("Mật khẩu phải có ít nhất 6 ký tự.");
+      return false;
+    }
+    if (formData.address.length > 0) {
+      for (let i = 0; i < formData.address.length; i++) {
+        const addr = formData.address[i];
+        if (
+          !addr.fullName?.trim() ||
+          !addr.phone?.trim() ||
+          !addr.province?.trim() ||
+          !addr.district?.trim() ||
+          !addr.ward?.trim() ||
+          !addr.address?.trim()
+        ) {
+          toast.error(`Vui lòng điền đầy đủ thông tin cho Địa chỉ ${i + 1}.`);
+          return false;
+        }
+      }
+    }
 
+    return true;
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     try {
       setLoading(true);
       const data = { ...formData };
