@@ -27,6 +27,7 @@ import {
   ProfilePage,
   OrderDetailPage,
   OrdersPage,
+  CheckoutPage,
 } from "./pages";
 import TestUI from "./TestUI";
 const App = () => {
@@ -73,6 +74,7 @@ const App = () => {
           <Route path="cart" element={<CartPage />} />
           <Route path="orders" element={<OrdersPage />} />
           <Route path="orders/:id" element={<OrderDetailPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
         </Route>
         <Route path="testUI" element={<TestUI />} />
         {/* Not found routes */}

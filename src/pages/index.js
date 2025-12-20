@@ -21,6 +21,7 @@ export { WishlistPage } from "./Wishlist";
 export { PromotionPage } from "./Promotions";
 // Cart and Checkout
 export { CartPage } from "./Cart";
+export { CheckoutPage } from "./Checkout";
 // Orders
 export { OrdersPage, OrderDetailPage } from "./Orders";
 // Profile

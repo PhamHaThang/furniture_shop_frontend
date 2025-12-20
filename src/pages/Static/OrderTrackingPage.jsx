@@ -4,7 +4,7 @@ import { Search, Package, ArrowRight, AlertCircle } from "lucide-react";
 import { Breadcrumb } from "../../components/common";
 import { Button, Input, Spinner } from "../../components/ui";
 import { orderService } from "../../services";
-import { ROUTES } from "../../config";
+import { PLACEHOLDER_IMAGE, ROUTES } from "../../config";
 import { formatPrice, formatDateTime } from "../../utils";
 import { useAuth } from "../../contexts";
 
@@ -196,7 +196,7 @@ const OrderTrackingPage = () => {
                 {order.items?.slice(0, 3).map((item, index) => (
                   <div key={index} className="flex gap-3">
                     <img
-                      src={item.image || "/placeholder.jpg"}
+                      src={item.image || PLACEHOLDER_IMAGE}
                       alt={item.name}
                       className="w-14 h-14 object-cover rounded-lg"
                     />

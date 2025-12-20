@@ -89,29 +89,14 @@ export const CartProvider = ({ children }) => {
   const addItem = useCallback(
     async (product) => {
       if (!isAuthenticated) return;
-      setItems((prevItems) => {
-        const existingIndex = prevItems.findIndex(
-          (item) => item._id === product._id
-        );
-        if (existingIndex !== -1) {
-          const newItems = [...prevItems];
-          newItems[existingIndex].quantity += product.quantity || 1;
-          return newItems;
-        }
-        return [
-          ...prevItems,
-          {
-            ...product,
-            quantity: product.quantity || 1,
-            stock: product.stock || 0,
-          },
-        ];
-      });
+
       try {
         await cartService.addToCart(product._id, product.quantity || 1);
+        await syncWithServer();
       } catch (error) {
         console.error("Lỗi khi thêm sản phẩm vào giỏ hàng:", error);
-        syncWithServer();
+        await syncWithServer();
+        throw error;
       }
     },
     [isAuthenticated, syncWithServer]

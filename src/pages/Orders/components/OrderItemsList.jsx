@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Package, Star, CheckCircle } from "lucide-react";
-import { ROUTES } from "../../../config";
+import { PLACEHOLDER_IMAGE, ROUTES } from "../../../config";
 import { formatPrice } from "../../../utils";
 
 const OrderItemsList = ({ items, canReview, reviewedProducts, onReview }) => {
@@ -19,7 +19,7 @@ const OrderItemsList = ({ items, canReview, reviewedProducts, onReview }) => {
             <Link to={`${ROUTES.PRODUCTS}/${item.product?.slug || "#"}`}>
               <img
                 src={
-                  item.image || item.product?.images?.[0] || "/placeholder.jpg"
+                  item.image || item.product?.images?.[0] || PLACEHOLDER_IMAGE
                 }
                 alt={item.name}
                 className="w-20 h-20 object-cover rounded-lg"

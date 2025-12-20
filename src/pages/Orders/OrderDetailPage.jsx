@@ -43,12 +43,14 @@ const OrderDetailPage = () => {
         // Fetch reviewed products for this order
         if (response.order && response.order.items) {
           const productIds = response.order.items
-            .map(item => item.product?._id || item.product)
+            .map((item) => item.product?._id || item.product)
             .filter(Boolean);
-          
+
           if (productIds.length > 0) {
             try {
-              const reviewResponse = await reviewService.getMyReviewedProducts(productIds);
+              const reviewResponse = await reviewService.getMyReviewedProducts(
+                productIds
+              );
               setReviewedProducts(new Set(reviewResponse.productIds));
             } catch (error) {
               console.error("Failed to fetch reviewed products:", error);
@@ -150,7 +152,6 @@ const OrderDetailPage = () => {
   const StatusIcon = statusConfig.icon;
   return (
     <div className="container mx-auto px-4 py-8">
-      {console.log("Rendering order detail for order:", order)}
       <Breadcrumb
         items={[
           { label: "Đơn hàng", path: ROUTES.ORDERS },

@@ -12,7 +12,7 @@ import { Button, Spinner, Input, ConfirmModal } from "../../components/ui";
 import { Breadcrumb, EmptyState } from "../../components/common";
 import { useAuth, useCart } from "../../contexts";
 import { cartService } from "../../services";
-import { ROUTES } from "../../config";
+import { PLACEHOLDER_IMAGE, ROUTES } from "../../config";
 import { formatPrice } from "../../utils";
 import toast from "react-hot-toast";
 const CartPage = () => {
@@ -88,7 +88,10 @@ const CartPage = () => {
       navigate(ROUTES.LOGIN);
       return;
     }
-    if (!promoCode.trim()) return;
+    if (!promoCode.trim()) {
+      toast.error("Vui lòng nhập mã giảm giá");
+      return;
+    }
     setApplyingPromo(true);
     try {
       const response = await cartService.applyDiscount(promoCode.trim());
@@ -167,7 +170,7 @@ const CartPage = () => {
                   to={`${ROUTES.PRODUCTS}/${item.slug}`}
                   className="flex-shrink-0">
                   <img
-                    src={item.image || "/placeholder.jpg"}
+                    src={item.image || PLACEHOLDER_IMAGE}
                     alt={item.name}
                     className="w-20 h-20 object-cover rounded-lg"
                   />
