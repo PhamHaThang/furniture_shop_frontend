@@ -28,6 +28,14 @@ import {
   OrderDetailPage,
   OrdersPage,
   CheckoutPage,
+  AdminUsersPage,
+  AdminProductsPage,
+  AdminCategoriesPage,
+  AdminBrandsPage,
+  AdminOrdersPage,
+  AdminOrderDetailPage,
+  AdminReviewsPage,
+  AdminPromotionsPage,
 } from "./pages";
 import TestUI from "./TestUI";
 const App = () => {
@@ -45,6 +53,14 @@ const App = () => {
         {/* Admin routes */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboardPage />} />
+          <Route path="users" element={<AdminUsersPage />} />
+          <Route path="products" element={<AdminProductsPage />} />
+          <Route path="categories" element={<AdminCategoriesPage />} />
+          <Route path="brands" element={<AdminBrandsPage />} />
+          <Route path="orders" element={<AdminOrdersPage />} />
+          <Route path="orders/:id" element={<AdminOrderDetailPage />} />
+          <Route path="reviews" element={<AdminReviewsPage />} />
+          <Route path="promotions" element={<AdminPromotionsPage />} />
         </Route>
       </Route>
       <Route path="/" element={<MainLayout />}>

@@ -285,9 +285,34 @@ export const SORT_OPTIONS = [
 
 // STATUS ORDERS MAP
 export const STATUS_ORDERS_MAP = {
-  pending: { label: "Chờ xác nhận", variant: "warning", icon: Clock },
-  processing: { label: "Đang xử lý", variant: "info", icon: Package },
-  shipped: { label: "Đang giao", variant: "primary", icon: Truck },
-  delivered: { label: "Đã giao", variant: "success", icon: CheckCircle },
-  cancelled: { label: "Đã hủy", variant: "danger", icon: XCircle },
+  pending: {
+    label: "Chờ xác nhận",
+    variant: "warning",
+    icon: Clock,
+    color: "bg-yellow-100 text-yellow-700",
+  },
+  processing: {
+    label: "Đang xử lý",
+    variant: "info",
+    icon: Package,
+    color: "bg-blue-100 text-blue-700",
+  },
+  shipped: {
+    label: "Đang giao",
+    variant: "primary",
+    icon: Truck,
+    color: "bg-purple-100 text-purple-700",
+  },
+  delivered: {
+    label: "Đã giao",
+    variant: "success",
+    icon: CheckCircle,
+    color: "bg-green-100 text-green-700",
+  },
+  cancelled: {
+    label: "Đã hủy",
+    variant: "danger",
+    icon: XCircle,
+    color: "bg-red-100 text-red-700",
+  },
 };

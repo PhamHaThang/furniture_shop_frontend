@@ -14,7 +14,17 @@ export { BrandsPage } from "./Brands";
 // Categories
 export { CategoriesPage } from "./Categories";
 // Admin
-export { AdminDashboardPage } from "./Admin";
+export {
+  AdminDashboardPage,
+  AdminBrandsPage,
+  AdminCategoriesPage,
+  AdminOrderDetailPage,
+  AdminOrdersPage,
+  AdminProductsPage,
+  AdminPromotionsPage,
+  AdminReviewsPage,
+  AdminUsersPage,
+} from "./Admin";
 // Wishlist
 export { WishlistPage } from "./Wishlist";
 // Promotions

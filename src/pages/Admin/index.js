@@ -1,1 +1,9 @@
 export { default as AdminDashboardPage } from "./DashboardPage";
+export { default as AdminUsersPage } from "./UsersPage";
+export { default as AdminProductsPage } from "./ProductsPage";
+export { default as AdminCategoriesPage } from "./CategoriesPage";
+export { default as AdminBrandsPage } from "./BrandsPage";
+export { default as AdminOrdersPage } from "./OrdersPage";
+export { default as AdminOrderDetailPage } from "./OrderDetailPage";
+export { default as AdminReviewsPage } from "./ReviewsPage";
+export { default as AdminPromotionsPage } from "./PromotionsPage";
