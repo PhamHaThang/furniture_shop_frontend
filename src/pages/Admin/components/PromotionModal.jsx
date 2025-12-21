@@ -15,7 +15,18 @@ const PromotionModal = ({ isOpen, onClose, promotion, onSave }) => {
     isActive: true,
   });
   const [loading, setLoading] = useState(false);
-
+  const resetForm = () => {
+    setFormData({
+      code: "",
+      description: "",
+      discountType: "percentage",
+      discountValue: "",
+      minSpend: "",
+      startDate: "",
+      endDate: "",
+      isActive: true,
+    });
+  };
   useEffect(() => {
     if (promotion) {
       setFormData({
@@ -30,18 +41,7 @@ const PromotionModal = ({ isOpen, onClose, promotion, onSave }) => {
       });
     } else resetForm();
   }, [promotion]);
-  const resetForm = () => {
-    setFormData({
-      code: "",
-      description: "",
-      discountType: "percentage",
-      discountValue: "",
-      minSpend: "",
-      startDate: "",
-      endDate: "",
-      isActive: true,
-    });
-  };
+
   const validateForm = () => {
     if (!formData.code.trim()) {
       toast.error("Mã khuyến mãi không được để trống");
@@ -109,7 +109,10 @@ const PromotionModal = ({ isOpen, onClose, promotion, onSave }) => {
             {promotion ? "Chỉnh sửa khuyến mãi" : "Thêm khuyến mãi mới"}
           </h2>
           <button
-            onClick={onClose}
+            onClick={() => {
+              onClose();
+              resetForm();
+            }}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
             <X className="w-5 h-5 " />
           </button>
@@ -213,7 +216,10 @@ const PromotionModal = ({ isOpen, onClose, promotion, onSave }) => {
             <Button
               type="button"
               variant="outline"
-              onClick={onClose}
+              onClick={() => {
+                onClose();
+                resetForm();
+              }}
               className="flex-1">
               Hủy
             </Button>

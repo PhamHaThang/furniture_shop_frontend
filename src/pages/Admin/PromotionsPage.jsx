@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { PromotionModal } from "./components";
 import { adminService } from "../../services";
 import toast from "react-hot-toast";
-import { Button, Input } from "../../components";
+import { Button, ConfirmModal, Input } from "../../components";
 import {
   Calendar,
   ChevronLeft,
@@ -175,18 +175,11 @@ const PromotionsPage = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center gap-1">
-                          {promotion.discountType === "percentage" ? (
-                            <>
-                              <Percent className="w-4 h-4 text-gray-400" />
-                              <span className="font-medium">
-                                {promotion.discountValue}%
-                              </span>
-                            </>
-                          ) : (
-                            <span className="font-medium">
-                              {formatPrice(promotion.discountValue)}
-                            </span>
-                          )}
+                          <span className="font-medium">
+                            {promotion.discountType === "percentage"
+                              ? promotion.discountValue + "%"
+                              : formatPrice(promotion.discountValue)}
+                          </span>
                         </div>
                         {promotion.minSpend > 0 && (
                           <p className="text-xs text-gray-500">
@@ -218,13 +211,13 @@ const PromotionsPage = () => {
                         <div className="flex items-center justify-end gap-2">
                           <button
                             onClick={() => handleEdit(promotion)}
-                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
                             title="Chỉnh sửa">
                             <Edit2 className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => setDeleteConfirm(promotion)}
-                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                             title="Xóa">
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -252,7 +245,7 @@ const PromotionsPage = () => {
                   setPagination((prev) => ({ ...prev, page: prev.page - 1 }))
                 }
                 disabled={pagination.page === 1}
-                className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <span className="text-sm text-gray-700">
@@ -263,7 +256,7 @@ const PromotionsPage = () => {
                   setPagination((prev) => ({ ...prev, page: prev.page + 1 }))
                 }
                 disabled={pagination.page === pagination.totalPages}
-                className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>
@@ -279,31 +272,13 @@ const PromotionsPage = () => {
       />
       {/* Delete Confirmation */}
       {deleteConfirm && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-sm p-6">
-            <h3 className="text-lg font-semibold text-char-900 mb-2">
-              Xác nhận xóa
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Bạn có chắc chắn muốn xóa khuyến mãi{" "}
-              <strong>{deleteConfirm.code}</strong>?
-            </p>
-            <div className="flex gap-3">
-              <Button
-                variant="outline"
-                onClick={() => setDeleteConfirm(null)}
-                className="flex-1">
-                Hủy
-              </Button>
-              <Button
-                variant="danger"
-                onClick={() => handleDelete(deleteConfirm._id)}
-                className="flex-1">
-                Xóa
-              </Button>
-            </div>
-          </div>
-        </div>
+        <ConfirmModal
+          title="Xác nhận xóa"
+          message={`Bạn có chắc chắn muốn xóa khuyến mãi ${deleteConfirm.code}?`}
+          isOpen={Boolean(deleteConfirm)}
+          onClose={() => setDeleteConfirm(null)}
+          onConfirm={() => handleDelete(deleteConfirm._id)}
+        />
       )}
     </div>
   );

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { X, Eye, EyeOff, MapPin, Upload } from "lucide-react";
 import toast from "react-hot-toast";
 import { adminService, uploadService } from "../../../services";
-import { Button, Input, Select, Textarea } from "../../../components";
+import { Button, Input, Select } from "../../../components";
 const UserModal = ({ isOpen, onClose, user, onSave }) => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -16,6 +16,37 @@ const UserModal = ({ isOpen, onClose, user, onSave }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const resetForm = () => {
+    setFormData({
+      fullName: "",
+      email: "",
+      password: "",
+      phone: "",
+      role: "user",
+      avatar: "",
+      address: [],
+    });
+  };
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      toast.error("Vui lòng chọn tệp hình ảnh hợp lệ.");
+      return;
+    }
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Kích thước tệp không vượt quá 5MB.");
+      return;
+    }
+    // Preview image immediately using FileReader
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFormData((prev) => ({ ...prev, avatar: reader.result }));
+    };
+    reader.readAsDataURL(file);
+  };
   useEffect(() => {
     if (user)
       setFormData((prev) => ({
@@ -30,54 +61,7 @@ const UserModal = ({ isOpen, onClose, user, onSave }) => {
       }));
     else resetForm();
   }, [user]);
-  const resetForm = () => {
-    setFormData({
-      fullName: "",
-      email: "",
-      password: "",
-      phone: "",
-      role: "user",
-      avatar: "",
-      address: [],
-    });
-  };
-  const handleAvatarUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
 
-    // Validate file type
-    if (!file.type.startsWith("image/")) {
-      toast.error("Vui lòng chọn tệp hình ảnh hợp lệ.");
-      return;
-    }
-
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error("Kích thước tệp không vượt quá 5MB.");
-      return;
-    }
-
-    try {
-      setUploading(true);
-      toast.loading("Đang tải lên...", { id: "avatar-upload" });
-
-      // Gọi API upload
-      const response = await uploadService.uploadImage(file);
-      setFormData((prev) => ({
-        ...prev,
-        avatar: response.url,
-      }));
-      toast.success("Tải ảnh lên thành công!", { id: "avatar-upload" });
-    } catch (error) {
-      console.error("Error uploading avatar:", error);
-      toast.error("Tải ảnh lên thất bại. Vui lòng thử lại.", {
-        id: "avatar-upload",
-      });
-    } finally {
-      setUploading(false);
-      toast.dismiss("avatar-upload");
-    }
-  };
   const handleAddAddress = () => {
     setFormData({
       ...formData,
@@ -160,7 +144,30 @@ const UserModal = ({ isOpen, onClose, user, onSave }) => {
     if (!validateForm()) return;
     try {
       setLoading(true);
-      const data = { ...formData };
+      let imageUrl = formData.avatar;
+      // If image is a base64 string, upload it
+      // If image is base64, upload to Cloudinary first
+      if (imageUrl && imageUrl.startsWith("data:image/")) {
+        setUploading(true);
+        try {
+          // Convert base64 to blob
+          const response = await fetch(imageUrl);
+          const blob = await response.blob();
+          const file = new File([blob], "brand-logo.jpg", { type: blob.type });
+
+          // Upload to Cloudinary
+          const result = await uploadService.uploadImage(file);
+          imageUrl = result.data.url;
+        } catch {
+          toast.error("Không thể tải ảnh lên");
+          setLoading(false);
+          setUploading(false);
+          return;
+        } finally {
+          setUploading(false);
+        }
+      }
+      const data = { ...formData, avatar: imageUrl };
       if (!data.password) delete data.password;
 
       if (user) {
@@ -290,7 +297,7 @@ const UserModal = ({ isOpen, onClose, user, onSave }) => {
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={handleAvatarUpload}
+                    onChange={handleImageUpload}
                     className="hidden"
                     disabled={uploading}
                   />
@@ -302,7 +309,7 @@ const UserModal = ({ isOpen, onClose, user, onSave }) => {
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, avatar: "" })}
-                    className="text-xs text-red-600 hover:text-red-700 mt-1">
+                    className="text-xs text-red-600 hover:text-red-700 mt-1 cursor-pointer">
                     Xóa ảnh
                   </button>
                 )}
