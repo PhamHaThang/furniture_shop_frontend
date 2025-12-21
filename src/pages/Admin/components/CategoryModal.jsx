@@ -104,7 +104,6 @@ const CategoryModal = ({ isOpen, onClose, category, onSave, categories }) => {
       }
       onSave();
       onClose();
-      resetForm();
     } catch (error) {
       toast.error(error.message || "Có lỗi xảy ra");
     } finally {
@@ -220,7 +219,6 @@ const CategoryModal = ({ isOpen, onClose, category, onSave, categories }) => {
               className="flex-1"
               onClick={() => {
                 onClose();
-                resetForm();
               }}>
               Hủy
             </Button>

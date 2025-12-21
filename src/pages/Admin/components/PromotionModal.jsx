@@ -93,7 +93,6 @@ const PromotionModal = ({ isOpen, onClose, promotion, onSave }) => {
       }
       onSave();
       onClose();
-      resetForm();
     } catch (error) {
       toast.error(error.message || "Có lỗi xảy ra");
     } finally {
@@ -111,7 +110,6 @@ const PromotionModal = ({ isOpen, onClose, promotion, onSave }) => {
           <button
             onClick={() => {
               onClose();
-              resetForm();
             }}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
             <X className="w-5 h-5 " />
@@ -218,7 +216,6 @@ const PromotionModal = ({ isOpen, onClose, promotion, onSave }) => {
               variant="outline"
               onClick={() => {
                 onClose();
-                resetForm();
               }}
               className="flex-1">
               Hủy

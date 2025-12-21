@@ -179,7 +179,6 @@ const UserModal = ({ isOpen, onClose, user, onSave }) => {
       }
       onSave();
       onClose();
-      resetForm();
     } catch (error) {
       console.error("Error saving user:", error);
       toast.error(error.message || "Có lỗi xảy ra");
@@ -198,7 +197,6 @@ const UserModal = ({ isOpen, onClose, user, onSave }) => {
           <button
             onClick={() => {
               onClose();
-              resetForm();
             }}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
             <X className="w-5 h-5" />
@@ -436,7 +434,6 @@ const UserModal = ({ isOpen, onClose, user, onSave }) => {
             <Button
               onClick={() => {
                 onClose();
-                resetForm();
               }}
               variant="outline"
               className="flex-1">

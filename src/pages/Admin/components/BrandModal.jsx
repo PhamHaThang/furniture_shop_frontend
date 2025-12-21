@@ -100,7 +100,6 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
       }
       onSave();
       onClose();
-      resetForm();
     } catch (error) {
       toast.error(error.message || "Đã xảy ra lỗi. Vui lòng thử lại.");
     } finally {
@@ -118,7 +117,6 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
           <button
             onClick={() => {
               onClose();
-              resetForm();
             }}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
             <X className="w-5 h-5" />
@@ -201,7 +199,6 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
               type="button"
               onClick={() => {
                 onClose();
-                resetForm();
               }}
               className="flex-1">
               Hủy
