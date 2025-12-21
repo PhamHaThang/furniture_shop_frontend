@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { useState, useEffect } from "react";
+import { X, Upload } from "lucide-react";
 import { adminService, uploadService } from "../../../services";
-import { Button, Input, Textarea } from "../../../components";
-import { Upload, X } from "lucide-react";
+import toast from "react-hot-toast";
+import { Button, Input, Select, Textarea } from "../../../components";
 
-const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
+const CategoryModal = ({ isOpen, onClose, category, onSave, categories }) => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     image: "",
+    parentCategory: "",
   });
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -17,20 +18,21 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
       name: "",
       description: "",
       image: "",
+      parentCategory: "",
     });
   };
   useEffect(() => {
-    if (brand) {
+    if (category) {
       setFormData({
-        name: brand.name || "",
-        description: brand.description || "",
-        image: brand.image || "",
+        name: category.name || "",
+        description: category.description || "",
+        image: category.image || "",
+        parentCategory:
+          category.parentCategory?._id || category.parentCategory || "",
       });
-    } else {
-      resetForm();
-    }
-  }, [brand, isOpen]);
-  const handleImageUpload = async (e) => {
+    } else resetForm();
+  }, [category, isOpen]);
+  const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -45,6 +47,7 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
       toast.error("Kích thước ảnh không được vượt quá 5MB");
       return;
     }
+
     // Preview image immediately using FileReader
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -54,7 +57,7 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
   };
   const validateForm = () => {
     if (!formData.name.trim()) {
-      toast.error("Tên thương hiệu là bắt buộc");
+      toast.error("Tên danh mục là bắt buộc");
       return false;
     }
     return true;
@@ -65,7 +68,7 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
     setLoading(true);
     try {
       let imageUrl = formData.image;
-      // If image is a base64 string, upload it
+
       // If image is base64, upload to Cloudinary first
       if (imageUrl && imageUrl.startsWith("data:image/")) {
         setUploading(true);
@@ -73,62 +76,62 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
           // Convert base64 to blob
           const response = await fetch(imageUrl);
           const blob = await response.blob();
-          const file = new File([blob], "brand-logo.jpg", { type: blob.type });
+          const file = new File([blob], "category-image.jpg", {
+            type: blob.type,
+          });
 
           // Upload to Cloudinary
           const result = await uploadService.uploadImage(file);
-          imageUrl = result.data?.url;
-        } catch {
-          toast.error("Không thể tải ảnh lên");
+          imageUrl = result.data.url;
+        } catch (error) {
+          toast.error(error.message || "Không thể tải ảnh lên");
           setLoading(false);
           setUploading(false);
-          return;
         } finally {
           setUploading(false);
         }
       }
-      const data = {
-        ...formData,
-        image: imageUrl,
-      };
-      if (brand) {
-        await adminService.updateBrand(brand._id, data);
-        toast.success("Thương hiệu đã được cập nhật thành công.");
+
+      const data = { ...formData, image: imageUrl };
+      if (!data.parentCategory) delete data.parentCategory;
+
+      if (category) {
+        await adminService.updateCategory(category._id, data);
+        toast.success("Cập nhật danh mục thành công");
       } else {
-        await adminService.createBrand(data);
-        toast.success("Thương hiệu đã được tạo thành công.");
+        await adminService.createCategory(data);
+        toast.success("Tạo danh mục thành công");
       }
       onSave();
       onClose();
       resetForm();
     } catch (error) {
-      toast.error(error.message || "Đã xảy ra lỗi. Vui lòng thử lại.");
+      toast.error(error.message || "Có lỗi xảy ra");
     } finally {
       setLoading(false);
     }
   };
   if (!isOpen) return null;
+  // Filter out current category from parent options
+  const parentOptions = categories.filter((c) => c._id !== category?._id);
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-4 border-b">
           <h2 className="text-lg font-semibold text-char-900">
-            {brand ? "Chỉnh sửa thương hiệu" : "Thêm thương hiệu mới"}
+            {category ? "Chỉnh sửa danh mục" : "Thêm danh mục mới"}
           </h2>
           <button
-            onClick={() => {
-              onClose();
-              resetForm();
-            }}
+            onClick={onClose}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
             <X className="w-5 h-5" />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
-          {/* Logo */}
+          {/* Image */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Logo
+              Hình ảnh
             </label>
             <div className="flex items-center gap-4">
               {formData.image ? (
@@ -136,17 +139,17 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
                   <div className="relative w-24 h-24 group">
                     <img
                       src={formData.image}
-                      alt="Brand logo"
-                      className="w-full h-full object-contain rounded-lg bg-gray-50 p-2"
+                      alt="Category"
+                      className="w-full h-full object-cover rounded-lg"
                     />
                     <button
                       type="button"
                       onClick={() => setFormData({ ...formData, image: "" })}
-                      className="absolute -top-2 -right-2 p-1.5 bg-red-500 text-white rounded-full shadow-lg hover:bg-red-600 transition-colors cursor-pointer">
+                      className="absolute -top-2 -right-2 p-1.5 bg-red-500 text-white rounded-full shadow-lg hover:bg-red-600 transition-colors">
                       <X className="w-3.5 h-3.5" />
                     </button>
                   </div>
-                  <label className="px-3 py-2 text-sm border border-primary-500 text-primary-500 rounded-lg hover:bg-primary-50 focus:ring-primary-300 focus:outline-none cursor-pointer transition-colors ">
+                  <label className="px-3 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
                     Thay đổi
                     <input
                       type="file"
@@ -181,7 +184,8 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
             </div>
           </div>
           <Input
-            label="Tên thương hiệu"
+            label="Tên danh mục *"
+            type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
@@ -194,25 +198,39 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
             }
             rows={3}
           />
+          <Select
+            label="Danh mục cha"
+            placeholder=""
+            options={[{ value: "", label: "Không có danh mục cha" }].concat(
+              parentOptions.map((cat) => ({
+                value: cat._id,
+                label: cat.name,
+              }))
+            )}
+            value={formData.parentCategory}
+            onChange={(value) =>
+              setFormData({ ...formData, parentCategory: value })
+            }
+          />
 
           <div className="flex gap-3 pt-4">
             <Button
-              variant="outline"
               type="button"
+              variant="outline"
+              className="flex-1"
               onClick={() => {
                 onClose();
                 resetForm();
-              }}
-              className="flex-1">
+              }}>
               Hủy
             </Button>
 
             <Button
               type="submit"
               disabled={loading}
-              className="flex-1 "
+              className="flex-1"
               loading={loading}>
-              {loading ? "Đang xử lý..." : brand ? "Cập nhật" : "Tạo mới"}
+              {loading ? "Đang xử lý..." : category ? "Cập nhật" : "Tạo mới"}
             </Button>
           </div>
         </form>
@@ -220,5 +238,4 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
     </div>
   );
 };
-
-export default BrandModal;
+export default CategoryModal;
