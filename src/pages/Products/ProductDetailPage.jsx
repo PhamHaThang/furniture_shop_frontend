@@ -180,7 +180,7 @@ const ProductDetailPage = () => {
           <h2 className="text-2xl font-bold text-char-900 mb-6">
             Sản phẩm liên quan
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
             {relatedProducts.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}

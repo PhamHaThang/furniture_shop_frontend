@@ -148,7 +148,7 @@ const CartPage = () => {
         Giỏ hàng ({totalItems} sản phẩm)
       </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
         {/* Cart Items */}
         <div className="lg:col-span-2 space-y-4">
           {/* Header */}

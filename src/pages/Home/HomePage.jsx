@@ -52,7 +52,7 @@ const HomePage = () => {
   return (
     <div className="space-y-16 pb-16">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
+      <section className="relative py-16 lg:py-32 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
@@ -66,7 +66,7 @@ const HomePage = () => {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl">
-            <h1 className="text-4xl lg:text-6xl font-bold text-beige-50 mb-6 drop-shadow-lg">
+            <h1 className="text-3xl lg:text-5xl xl:text-6xl font-bold text-beige-50 mb-6 drop-shadow-lg">
               Nội thất hiện đại cho
               <span className="text-primary-400"> ngôi nhà của bạn</span>
             </h1>
@@ -126,7 +126,7 @@ const HomePage = () => {
               <ArrowRight className="ml-1" size={18} />
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
             {categories.map((category) => (
               <Link
                 key={category._id}
@@ -169,7 +169,7 @@ const HomePage = () => {
               <ArrowRight className="ml-1" size={18} />
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
             {featuredProducts.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
@@ -222,7 +222,7 @@ const HomePage = () => {
               <ArrowRight className="ml-1" size={18} />
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
             {newProducts.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
@@ -244,7 +244,7 @@ const HomePage = () => {
               <ArrowRight className="ml-1" size={18} />
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
             {bestSellers.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}

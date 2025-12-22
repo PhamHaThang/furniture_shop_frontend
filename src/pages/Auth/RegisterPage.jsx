@@ -85,7 +85,7 @@ const RegisterPage = () => {
       </div>
 
       {/* Form */}
-      <div className="bg-white rounded-2xl shadow-lg p-8">
+      <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 max-w-md mx-auto">
         <form onSubmit={handleSubmit} className="space-y-5">
           <Input
             label="Họ và tên"

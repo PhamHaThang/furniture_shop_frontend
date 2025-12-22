@@ -61,7 +61,7 @@ const LoginPage = () => {
         <p className="text-char-500 mt-2">Đăng nhập vào tài khoản của bạn</p>
       </div>
       {/* Form */}
-      <div className="bg-white rounded-2xl shadow-lg p-8">
+      <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 max-w-md mx-auto">
         <form onSubmit={handleSubmit} className="space-y-6">
           <Input
             label="Email"

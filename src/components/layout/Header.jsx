@@ -54,7 +54,7 @@ const Header = () => {
         isScrolled ? "bg-white/95 backdrop-blur-sm shadow-md" : "bg-white"
       }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-16 lg:h-20 gap-2 lg:gap-4">
           {/* Logo */}
           <Link to={ROUTES.HOME} className="flex items-center">
             <img src={logo} alt="Logo" className="h-8 object-contain" />
@@ -212,7 +212,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-beige-200 py-4">
+          <div className="lg:hidden border-t border-beige-200 py-4 absolute top-full left-0 right-0 bg-white shadow-lg z-50 px-4">
             {/* Mobile Search */}
             <form onSubmit={handleSearch} className="mb-4">
               <div className="relative">
@@ -232,17 +232,65 @@ const Header = () => {
             </form>
 
             {/* Mobile Nav Links */}
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-2 mb-4">
               {HEADER_NAV_LINKS.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-4 py-2 text-char-700 hover:bg-beige-100 rounded-lg transition-colors">
+                  className="px-4 py-3 text-char-700 hover:bg-beige-100 rounded-lg transition-colors font-medium">
                   {link.label}
                 </Link>
               ))}
             </nav>
+
+            {/* Mobile Auth Actions */}
+            <div className="border-t border-beige-100 pt-4 flex flex-col gap-2">
+              {isAuthenticated ? (
+                <>
+                  <Link
+                    to={ROUTES.PROFILE}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 text-char-700 hover:bg-beige-100 rounded-lg transition-colors">
+                    <User size={20} />
+                    Tài khoản của tôi
+                  </Link>
+                  {isAdmin && (
+                    <Link
+                      to={ROUTES.ADMIN_DASHBOARD}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center gap-3 px-4 py-3 text-char-700 hover:bg-beige-100 rounded-lg transition-colors">
+                      <Package size={20} />
+                      Quản trị
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors w-full text-left">
+                    <LogOut size={20} />
+                    Đăng xuất
+                  </button>
+                </>
+              ) : (
+                <div className="grid grid-cols-2 gap-3">
+                  <Link
+                    to={ROUTES.LOGIN}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex justify-center items-center px-4 py-2 border border-beige-300 rounded-lg text-char-700 font-medium hover:bg-beige-50 transition-colors">
+                    Đăng nhập
+                  </Link>
+                  <Link
+                    to={ROUTES.REGISTER}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex justify-center items-center px-4 py-2 bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-600 transition-colors">
+                    Đăng ký
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>

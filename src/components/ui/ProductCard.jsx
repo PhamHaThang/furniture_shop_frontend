@@ -114,7 +114,7 @@ const ProductCard = ({ product, horizontal = false }) => {
             </div>
 
             {/* Name */}
-            <h3 className="font-medium text-char-900 mb-2 line-clamp-2 group-hover:text-primary-500 transition-colors text-lg">
+            <h3 className="font-medium text-char-900 mb-2 line-clamp-2 group-hover:text-primary-500 transition-colors text-base md:text-lg">
               {product.name}
             </h3>
 
@@ -140,7 +140,7 @@ const ProductCard = ({ product, horizontal = false }) => {
           {/* Bottom Section */}
           <div className="flex items-center justify-between">
             {/* Price */}
-            <span className="text-xl font-bold text-primary-600">
+            <span className="text-lg md:text-xl font-bold text-primary-600">
               {formatPrice(product.price)}
             </span>
 
@@ -241,7 +241,7 @@ const ProductCard = ({ product, horizontal = false }) => {
         </div>
 
         {/* Name */}
-        <h3 className="font-medium text-char-900 mb-2 line-clamp-2 group-hover:text-primary-500 transition-colors">
+        <h3 className="font-medium text-char-900 mb-2 line-clamp-2 group-hover:text-primary-500 transition-colors text-base md:text-lg">
           {product.name}
         </h3>
         {/* Rating */}
@@ -257,7 +257,7 @@ const ProductCard = ({ product, horizontal = false }) => {
 
         {/* Price */}
         <div className="flex items-center gap-2">
-          <span className="text-lg font-bold text-primary-600">
+          <span className="text-lg md:text-xl font-bold text-primary-600">
             {formatPrice(product.price)}
           </span>
         </div>
