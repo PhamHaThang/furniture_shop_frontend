@@ -18,16 +18,16 @@ const HomePage = () => {
         const [featuredRes, newRes, bestSellersRes, categoriesRes, brandRes] =
           await Promise.all([
             productService.getFeaturedProducts({
-              limit: 8,
+              limit: 4,
             }),
             productService.getNewArrivals({
-              limit: 8,
+              limit: 4,
             }),
             productService.getBestSellers({
-              limit: 8,
+              limit: 4,
             }),
             categoryService.getAllCategories({
-              limit: 8,
+              limit: 4,
             }),
             brandService.getPopularBrands({
               limit: 6,
