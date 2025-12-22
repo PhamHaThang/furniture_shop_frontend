@@ -322,3 +322,11 @@ export const PAYMENT_STATUS_CONFIG = {
   completed: { color: "bg-green-100 text-green-700", label: "Đã thanh toán" },
   failed: { color: "bg-red-100 text-red-700", label: "Thất bại" },
 };
+
+// QUICK ACTIONS AI FOR CHATBOT
+export const QUICK_ACTIONS_AI = [
+  { label: "Tìm ghế sofa", query: "ghế sofa" },
+  { label: "Bàn làm việc", query: "bàn làm việc" },
+  { label: "Giường ngủ", query: "giường" },
+  { label: "Tủ quần áo", query: "tủ" },
+];
