@@ -176,9 +176,9 @@ const ProductModal = ({
       toast.error("Chỉ hỗ trợ file .glb hoặc .gltf");
       return;
     }
-    // Validate file size (max 50MB)
-    if (file.size > 50 * 1024 * 1024) {
-      toast.error("File model 3D không được vượt quá 50MB");
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error("File model 3D không được vượt quá 10MB");
       return;
     }
 
@@ -320,7 +320,7 @@ const ProductModal = ({
         setUploading(true);
         toast.loading("Đang tải model 3D lên...", { id: "upload-model" });
         try {
-          const result = await uploadService.uploadModel3D(newModel3DFile.file);
+          const result = await uploadService.upload3DModel(newModel3DFile.file);
           uploadedModel3DUrl = result.data.url;
           toast.success("Tải model 3D lên thành công", { id: "upload-model" });
         } catch (error) {
@@ -569,7 +569,7 @@ const ProductModal = ({
                       Nhấp để tải lên model 3D
                     </span>
                     <span className="text-xs text-gray-500">
-                      Hỗ trợ .glb, .gltf (tối đa 50MB)
+                      Hỗ trợ .glb, .gltf (tối đa 10MB)
                     </span>
                   </div>
                 )}
