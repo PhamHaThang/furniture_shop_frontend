@@ -4,15 +4,13 @@ import {
   Plus,
   Edit2,
   Trash2,
-  ChevronLeft,
-  ChevronRight,
   MapPin,
   RefreshCw,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { adminService } from "../../services";
 import { UserModal } from "./components";
-import { Button, ConfirmModal, Input, Select } from "../../components";
+import { Button, ConfirmModal, Input, Select, Pagination } from "../../components";
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -268,36 +266,18 @@ const UsersPage = () => {
         </div>
 
         {/* Pagination */}
-        {pagination.totalPages > 1 && (
-          <div className="flex items-center justify-between px-6 py-4 border-t">
-            <p className="text-sm text-gray-500">
-              Hiển thị {(pagination.page - 1) * pagination.limit + 1} -{" "}
-              {Math.min(pagination.page * pagination.limit, pagination.total)}{" "}
-              trong {pagination.total} kết quả
-            </p>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() =>
-                  setPagination((prev) => ({ ...prev, page: prev.page - 1 }))
-                }
-                disabled={pagination.page === 1}
-                className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <span className="text-sm text-gray-700">
-                Trang {pagination.page} / {pagination.totalPages}
-              </span>
-              <button
-                onClick={() =>
-                  setPagination((prev) => ({ ...prev, page: prev.page + 1 }))
-                }
-                disabled={pagination.page === pagination.totalPages}
-                className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        )}
+        <div className="flex items-center justify-between px-6 py-4 border-t">
+          <p className="text-sm text-gray-500">
+            Hiển thị {(pagination.page - 1) * pagination.limit + 1} -{" "}
+            {Math.min(pagination.page * pagination.limit, pagination.total)}{" "}
+            trong {pagination.total} kết quả
+          </p>
+          <Pagination
+            currentPage={pagination.page}
+            totalPages={pagination.totalPages}
+            onPageChange={(page) => setPagination((prev) => ({ ...prev, page }))}
+          />
+        </div>
       </div>
       {/* Modal */}
       <UserModal

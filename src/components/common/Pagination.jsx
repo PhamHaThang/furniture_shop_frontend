@@ -8,8 +8,6 @@ const Pagination = ({
   showLast = true,
   maxVisiblePages = 5,
 }) => {
-  if (totalPages <= 1) return null;
-
   const getPageNumbers = () => {
     const pages = [];
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
@@ -34,7 +32,7 @@ const Pagination = ({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-2 rounded-lg text-char-600 hover:bg-beige-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="p-2 rounded-lg text-char-600 hover:bg-beige-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
         aria-label="Previous page">
         <ChevronLeft size={20} />
       </button>
@@ -44,7 +42,7 @@ const Pagination = ({
         <>
           <button
             onClick={() => onPageChange(1)}
-            className="w-10 h-10 rounded-lg text-char-600 hover:bg-beige-100 transition-colors">
+            className="w-10 h-10 rounded-lg text-char-600 hover:bg-beige-100 transition-colors cursor-pointer">
             1
           </button>
           {pages[0] > 2 && <span className="px-2 text-char-400">...</span>}
@@ -56,7 +54,7 @@ const Pagination = ({
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`w-10 h-10 rounded-lg font-medium transition-colors ${
+          className={`w-10 h-10 rounded-lg font-medium transition-colors cursor-pointer ${
             currentPage === page
               ? "bg-primary-500 text-white"
               : "text-char-600 hover:bg-beige-100"
@@ -73,7 +71,7 @@ const Pagination = ({
           )}
           <button
             onClick={() => onPageChange(totalPages)}
-            className="w-10 h-10 rounded-lg text-char-600 hover:bg-beige-100 transition-colors">
+            className="w-10 h-10 rounded-lg text-char-600 hover:bg-beige-100 transition-colors cursor-pointer">
             {totalPages}
           </button>
         </>
@@ -83,7 +81,7 @@ const Pagination = ({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-2 rounded-lg text-char-600 hover:bg-beige-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="p-2 rounded-lg text-char-600 hover:bg-beige-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
         aria-label="Next page">
         <ChevronRight size={20} />
       </button>

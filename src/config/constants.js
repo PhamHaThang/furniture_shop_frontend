@@ -316,3 +316,9 @@ export const STATUS_ORDERS_MAP = {
     color: "bg-red-100 text-red-700",
   },
 };
+// PAYMENT STATUS CONFIG
+export const PAYMENT_STATUS_CONFIG = {
+  pending: { color: "bg-yellow-100 text-yellow-700", label: "Chờ thanh toán" },
+  completed: { color: "bg-green-100 text-green-700", label: "Đã thanh toán" },
+  failed: { color: "bg-red-100 text-red-700", label: "Thất bại" },
+};
