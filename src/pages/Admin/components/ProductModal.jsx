@@ -176,9 +176,9 @@ const ProductModal = ({
       toast.error("Chỉ hỗ trợ file .glb hoặc .gltf");
       return;
     }
-    // Validate file size (max 10MB)
-    if (file.size > 10 * 1024 * 1024) {
-      toast.error("File model 3D không được vượt quá 10MB");
+    // Validate file size (max 50MB)
+    if (file.size > 50 * 1024 * 1024) {
+      toast.error("File model 3D không được vượt quá 50MB");
       return;
     }
 
