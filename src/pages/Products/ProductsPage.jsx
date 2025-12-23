@@ -59,6 +59,25 @@ const ProductsPage = () => {
       initialLimit: 12,
     });
 
+  useEffect(() => {
+    const searchParam = searchParams.get("search") || "";
+    const categoryParam = searchParams.get("category") || "";
+    const brandParam = searchParams.get("brand") || "";
+    const minPriceParam = searchParams.get("minPrice") || "";
+    const maxPriceParam = searchParams.get("maxPrice") || "";
+    const sortParam = searchParams.get("sort") || "newest";
+
+    setFilters((prev) => ({
+      ...prev,
+      search: searchParam,
+      category: categoryParam,
+      brand: brandParam,
+      minPrice: minPriceParam,
+      maxPrice: maxPriceParam,
+      sort: sortParam,
+    }));
+  }, [searchParams]);
+
   // Fetch categories and brands
   useEffect(() => {
     const fetchCategoriesAndBrands = async () => {
