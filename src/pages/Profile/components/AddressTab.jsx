@@ -183,26 +183,26 @@ const AddressTab = () => {
                   ? "border-primary-500 bg-primary-50"
                   : "border-beige-200"
               }`}>
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
                     <span className="font-medium text-char-900">
                       {addr.fullName}
                     </span>
-                    <span className="text-char-400">|</span>
+                    <span className="hidden sm:inline text-char-400">|</span>
                     <span className="text-char-600">{addr.phone}</span>
                     {addr.isDefault && (
-                      <span className="px-2 py-0.5 bg-primary-500 text-white text-xs rounded">
+                      <span className="px-2 py-0.5 bg-primary-500 text-white text-xs rounded whitespace-nowrap">
                         Mặc định
                       </span>
                     )}
                   </div>
-                  <p className="text-char-600">
+                  <p className="text-char-600 text-sm break-words">
                     {addr.address}, {addr.ward}, {addr.district},{" "}
                     {addr.province}
                   </p>
                 </div>
-                <div className="flex items-center gap-2 ml-4">
+                <div className="flex items-center gap-2 sm:ml-4 self-end sm:self-start">
                   <button
                     onClick={() => openEditAddressModal(addr)}
                     className="p-2 text-char-500 hover:text-primary-500 hover:bg-beige-100 rounded-lg transition-colors">

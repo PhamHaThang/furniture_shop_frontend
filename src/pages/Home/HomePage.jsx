@@ -68,7 +68,7 @@ const HomePage = () => {
           <div className="max-w-2xl">
             <h1 className="text-3xl lg:text-5xl xl:text-6xl font-bold text-beige-50 mb-6 drop-shadow-lg">
               Nội thất hiện đại cho
-              <span className="text-primary-400"> ngôi nhà của bạn</span>
+              <span className="block text-primary-400"> ngôi nhà của bạn</span>
             </h1>
 
             <p className="text-lg text-beige-100 mb-8 drop-shadow">

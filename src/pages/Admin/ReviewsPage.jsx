@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Search,
-  Trash2,
-  Star,
-  User,
-} from "lucide-react";
+import { Search, Trash2, Star, User } from "lucide-react";
 import { Input, Button, Pagination, ConfirmModal } from "../../components";
 import { PLACEHOLDER_IMAGE } from "../../config";
 import toast from "react-hot-toast";
@@ -167,7 +162,9 @@ const ReviewsPage = () => {
           <Pagination
             currentPage={pagination.page}
             totalPages={pagination.totalPages}
-            onPageChange={(page) => setPagination((prev) => ({ ...prev, page }))}
+            onPageChange={(page) =>
+              setPagination((prev) => ({ ...prev, page }))
+            }
           />
         </div>
       </div>

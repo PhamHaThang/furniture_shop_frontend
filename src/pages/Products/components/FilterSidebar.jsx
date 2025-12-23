@@ -64,7 +64,7 @@ const FilterSidebar = ({
               label="Danh mục"
               value={filters.category}
               onChange={(e) => onFilterChange("category", e.target.value)}
-              placeholder="Tất cả danh mục"
+              placeholder=""
               options={[{ value: "", label: "Tất cả danh mục" }].concat(
                 categories.map((cat) => ({
                   value: cat._id,

@@ -14,6 +14,7 @@ import {
 import { useAuth, useCart, useWishlist } from "../../contexts";
 import { HEADER_NAV_LINKS, ROUTES } from "../../config";
 import logo from "../../assets/logo1.png";
+import toast from "react-hot-toast";
 const Header = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
@@ -45,6 +46,7 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
+    toast.success("Đăng xuất thành công!");
     navigate(ROUTES.HOME);
   };
 
@@ -254,6 +256,13 @@ const Header = () => {
                     className="flex items-center gap-3 px-4 py-3 text-char-700 hover:bg-beige-100 rounded-lg transition-colors">
                     <User size={20} />
                     Tài khoản của tôi
+                  </Link>
+                  <Link
+                    to={ROUTES.ORDERS}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-2 text-char-700 hover:bg-beige-50 rounded-lg transition-colors">
+                    <Package size={20} />
+                    Đơn hàng
                   </Link>
                   {isAdmin && (
                     <Link

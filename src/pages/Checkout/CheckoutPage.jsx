@@ -192,7 +192,7 @@ const CheckoutPage = () => {
         : selectedAddress;
       const orderData = {
         items: items.map((item) => ({
-          product: item.product._id,
+          product: item._id,
           quantity: item.quantity,
           price: item.price,
         })),

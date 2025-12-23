@@ -72,11 +72,9 @@ const BrandsPage = () => {
                 {brand.name || "Unnamed Brand"}
               </h3>
               {/* Product count */}
-              {brand.productCount && (
-                <p className="text-sm text-char-500">
-                  {brand.productCount || 0} sản phẩm
-                </p>
-              )}
+              <p className="text-sm text-char-500">
+                {brand.productCount || 0} sản phẩm
+              </p>
 
               {/* Description */}
               {brand.description && (

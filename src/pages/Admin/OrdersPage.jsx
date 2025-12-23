@@ -74,7 +74,7 @@ const OrdersPage = () => {
   };
   const handlePaymentStatusChange = async (orderId, newPaymentStatus) => {
     try {
-      await adminService.updateOrderPaymentStatus(orderId, newPaymentStatus);
+      await adminService.updatePaymentStatus(orderId, newPaymentStatus);
       toast.success("Cập nhật trạng thái thanh toán thành công");
       fetchOrders();
     } catch (error) {

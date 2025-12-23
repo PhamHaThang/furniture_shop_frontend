@@ -251,36 +251,36 @@ const ProductsPage = () => {
             <div className="flex items-center gap-4">
               {/* Mobile Filter Button */}
               {isMobile && (
-                <Button
-                  variant="outline"
-                  size="sm"
+                <button
+                  className="border-beige-300 border rounded-lg p-2.5 text-char-600border-2 border-primary-500 text-primary-500 hover:bg-primary-100 focus:ring-primary-300"
                   onClick={() => setShowFilters(true)}>
-                  <SlidersHorizontal size={18} className="mr-2" />
-                  Bộ lọc
-                </Button>
+                  <SlidersHorizontal size={18} />
+                </button>
               )}
 
               {/* View Mode */}
-              <div className="flex items-center border border-beige-300 rounded-lg">
-                <button
-                  onClick={() => setViewMode("grid")}
-                  className={`p-2.5 cursor-pointer ${
-                    viewMode === "grid"
-                      ? "bg-primary-500 text-white"
-                      : "text-char-600"
-                  } rounded-l-lg`}>
-                  <Grid3X3 size={18} />
-                </button>
-                <button
-                  onClick={() => setViewMode("list")}
-                  className={`p-2.5 cursor-pointer ${
-                    viewMode === "list"
-                      ? "bg-primary-500 text-white "
-                      : "text-char-600"
-                  } rounded-r-lg`}>
-                  <LayoutList size={18} />
-                </button>
-              </div>
+              {isMobile ? null : (
+                <div className="flex items-center border border-beige-300 rounded-lg">
+                  <button
+                    onClick={() => setViewMode("grid")}
+                    className={`p-2.5 cursor-pointer ${
+                      viewMode === "grid"
+                        ? "bg-primary-500 text-white"
+                        : "text-char-600"
+                    } rounded-l-lg`}>
+                    <Grid3X3 size={18} />
+                  </button>
+                  <button
+                    onClick={() => setViewMode("list")}
+                    className={`p-2.5 cursor-pointer ${
+                      viewMode === "list"
+                        ? "bg-primary-500 text-white "
+                        : "text-char-600"
+                    } rounded-r-lg`}>
+                    <LayoutList size={18} />
+                  </button>
+                </div>
+              )}
 
               {/* Sort */}
               <Select

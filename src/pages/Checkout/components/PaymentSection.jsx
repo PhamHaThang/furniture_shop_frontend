@@ -62,7 +62,7 @@ const PaymentSection = ({
                 <img
                   src={`https://img.vietqr.io/image/MBBANK-3850162111302-compact2.png?amount=${total}&addInfo=${contentBank}&accountName=PHAM%20HA%20THANG`}
                   alt="QR-Checkout"
-                  className="w-64 h-64 object-contain mx-auto"
+                  className="w-100 h-100 object-contain mx-auto"
                 />
                 <p className="text-center text-sm text-char-500 mt-3">
                   Số tiền:{" "}

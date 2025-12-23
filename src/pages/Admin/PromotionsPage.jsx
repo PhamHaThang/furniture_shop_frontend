@@ -50,8 +50,8 @@ const PromotionsPage = () => {
       setPromotions(response.promotions || []);
       setPagination((prev) => ({
         ...prev,
-        total: response.total || 0,
-        totalPages: response.totalPages || 0,
+        total: response.pagination?.total || 0,
+        totalPages: response.pagination?.totalPages || 0,
       }));
     } catch (error) {
       console.error("Error fetching promotions:", error);
@@ -239,7 +239,9 @@ const PromotionsPage = () => {
           <Pagination
             currentPage={pagination.page}
             totalPages={pagination.totalPages}
-            onPageChange={(page) => setPagination((prev) => ({ ...prev, page }))}
+            onPageChange={(page) =>
+              setPagination((prev) => ({ ...prev, page }))
+            }
           />
         </div>
       </div>

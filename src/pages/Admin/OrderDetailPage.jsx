@@ -62,7 +62,7 @@ const OrderDetailPage = () => {
   };
   const handlePaymentStatusChange = async (newPaymentStatus) => {
     try {
-      await adminService.updateOrderPaymentStatus(id, newPaymentStatus);
+      await adminService.updatePaymentStatus(id, newPaymentStatus);
       toast.success("Cập nhật trạng thái thanh toán thành công");
       fetchOrder();
     } catch (error) {
