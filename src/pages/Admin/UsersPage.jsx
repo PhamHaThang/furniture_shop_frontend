@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
-import {
-  Search,
-  Plus,
-  Edit2,
-  Trash2,
-  MapPin,
-  RefreshCw,
-} from "lucide-react";
+import { Search, Plus, Edit2, Trash2, MapPin, RefreshCw } from "lucide-react";
 import toast from "react-hot-toast";
 import { adminService } from "../../services";
 import { UserModal } from "./components";
-import { Button, ConfirmModal, Input, Select, Pagination } from "../../components";
+import {
+  Button,
+  ConfirmModal,
+  Input,
+  Select,
+  Pagination,
+} from "../../components";
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,7 +35,7 @@ const UsersPage = () => {
         search,
         deleted: filters.deleted,
       });
-      setUsers(response.users, []);
+      setUsers(response.users || []);
       setPagination((prev) => ({
         ...prev,
         total: response.pagination?.total || 0,
@@ -62,7 +61,7 @@ const UsersPage = () => {
   const handleDelete = async (userId) => {
     try {
       setLoading(true);
-      adminService.deleteUser(userId);
+      await adminService.deleteUserById(userId);
       toast.success("Xoá người dùng thành công.");
       fetchUsers();
     } catch (error) {
@@ -74,7 +73,7 @@ const UsersPage = () => {
   };
   const handleRestore = async (id) => {
     try {
-      await adminService.updateUser(id, { isDeleted: false });
+      await adminService.updateUserById(id, { isDeleted: false });
       toast.success("Khôi phục người dùng thành công");
       fetchUsers();
     } catch (error) {
@@ -275,14 +274,19 @@ const UsersPage = () => {
           <Pagination
             currentPage={pagination.page}
             totalPages={pagination.totalPages}
-            onPageChange={(page) => setPagination((prev) => ({ ...prev, page }))}
+            onPageChange={(page) =>
+              setPagination((prev) => ({ ...prev, page }))
+            }
           />
         </div>
       </div>
       {/* Modal */}
       <UserModal
         isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={() => {
+          setModalOpen(false);
+          setSelectedUser(null);
+        }}
         user={selectedUser}
         onSave={fetchUsers}
       />

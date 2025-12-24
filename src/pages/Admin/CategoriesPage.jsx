@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Search,
-  Plus,
-  Edit2,
-  Trash2,
-  FolderTree,
-} from "lucide-react";
+import { Search, Plus, Edit2, Trash2, FolderTree } from "lucide-react";
 import { CategoryModal } from "./components";
 import { adminService } from "../../services";
 import toast from "react-hot-toast";
@@ -200,7 +194,9 @@ const CategoriesPage = () => {
           <Pagination
             currentPage={pagination.page}
             totalPages={pagination.totalPages}
-            onPageChange={(page) => setPagination((prev) => ({ ...prev, page }))}
+            onPageChange={(page) =>
+              setPagination((prev) => ({ ...prev, page }))
+            }
           />
         </div>
       </div>
@@ -208,7 +204,10 @@ const CategoriesPage = () => {
       {/* Modal */}
       <CategoryModal
         isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={() => {
+          setModalOpen(false);
+          setSelectedCategory(null);
+        }}
         category={selectedCategory}
         onSave={fetchCategories}
         categories={categories}

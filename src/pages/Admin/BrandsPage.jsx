@@ -2,13 +2,7 @@ import { adminService } from "../../services";
 import { BrandModal } from "./components";
 import { Button, ConfirmModal, Input, Pagination } from "../../components";
 import { useState, useEffect } from "react";
-import {
-  Search,
-  Plus,
-  Edit2,
-  Trash2,
-  Building2,
-} from "lucide-react";
+import { Search, Plus, Edit2, Trash2, Building2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 const BrandsPage = () => {
@@ -193,7 +187,9 @@ const BrandsPage = () => {
           <Pagination
             currentPage={pagination.page}
             totalPages={pagination.totalPages}
-            onPageChange={(page) => setPagination((prev) => ({ ...prev, page }))}
+            onPageChange={(page) =>
+              setPagination((prev) => ({ ...prev, page }))
+            }
           />
         </div>
       </div>
@@ -201,7 +197,10 @@ const BrandsPage = () => {
       {/* Modal */}
       <BrandModal
         isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={() => {
+          setModalOpen(false);
+          setSelectedBrand(null);
+        }}
         brand={selectedBrand}
         onSave={fetchBrands}
       />

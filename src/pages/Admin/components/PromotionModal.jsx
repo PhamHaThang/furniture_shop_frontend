@@ -28,19 +28,23 @@ const PromotionModal = ({ isOpen, onClose, promotion, onSave }) => {
     });
   };
   useEffect(() => {
-    if (promotion) {
-      setFormData({
-        code: promotion.code || "",
-        description: promotion.description || "",
-        discountType: promotion.discountType || "percentage",
-        discountValue: promotion.discountValue || "",
-        minSpend: promotion.minSpend || "",
-        startDate: promotion.startDate ? promotion.startDate.split("T")[0] : "",
-        endDate: promotion.endDate ? promotion.endDate.split("T")[0] : "",
-        isActive: promotion.isActive !== false,
-      });
-    } else resetForm();
-  }, [promotion]);
+    if (isOpen) {
+      if (promotion) {
+        setFormData({
+          code: promotion.code || "",
+          description: promotion.description || "",
+          discountType: promotion.discountType || "percentage",
+          discountValue: promotion.discountValue || "",
+          minSpend: promotion.minSpend || "",
+          startDate: promotion.startDate
+            ? promotion.startDate.split("T")[0]
+            : "",
+          endDate: promotion.endDate ? promotion.endDate.split("T")[0] : "",
+          isActive: promotion.isActive !== false,
+        });
+      } else resetForm();
+    }
+  }, [promotion, isOpen]);
 
   const validateForm = () => {
     if (!formData.code.trim()) {

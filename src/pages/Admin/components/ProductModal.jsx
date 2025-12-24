@@ -68,36 +68,43 @@ const ProductModal = ({
     setInputValues({ color: "", material: "", tag: "" });
   };
   useEffect(() => {
-    if (product) {
-      // Cleanup old previews
-      newImageFiles.forEach((item) => {
-        if (item.preview) URL.revokeObjectURL(item.preview);
-      });
-      if (newModel3DFile?.preview) URL.revokeObjectURL(newModel3DFile.preview);
+    if (isOpen) {
+      if (product) {
+        // Cleanup old previews
+        newImageFiles.forEach((item) => {
+          if (item.preview) URL.revokeObjectURL(item.preview);
+        });
+        if (newModel3DFile?.preview)
+          URL.revokeObjectURL(newModel3DFile.preview);
 
-      setFormData({
-        name: product.name || "",
-        description: product.description || "",
-        sku: product.sku || "",
-        price: product.price || "",
-        originalPrice: product.originalPrice || "",
-        category: product.category?._id || "",
-        brand: product.brand?._id || "",
-        stock: product.stock || "",
-        images: product.images || [],
-        model3DUrl: product.model3DUrl || "",
-        dimensions: product.dimensions || { width: "", height: "", length: "" },
-        colors: product.colors || [],
-        materials: product.materials || [],
-        tags: product.tags || [],
-        isFeatured: product.isFeatured || false,
-      });
-      setNewImageFiles([]);
-      setNewModel3DFile(null);
-    } else {
-      resetForm();
+        setFormData({
+          name: product.name || "",
+          description: product.description || "",
+          sku: product.sku || "",
+          price: product.price || "",
+          originalPrice: product.originalPrice || "",
+          category: product.category?._id || "",
+          brand: product.brand?._id || "",
+          stock: product.stock || "",
+          images: product.images || [],
+          model3DUrl: product.model3DUrl || "",
+          dimensions: product.dimensions || {
+            width: "",
+            height: "",
+            length: "",
+          },
+          colors: product.colors || [],
+          materials: product.materials || [],
+          tags: product.tags || [],
+          isFeatured: product.isFeatured || false,
+        });
+        setNewImageFiles([]);
+        setNewModel3DFile(null);
+      } else {
+        resetForm();
+      }
     }
-  }, [product]);
+  }, [product, isOpen]);
 
   // Cleanup previews on unmount
   useEffect(() => {

@@ -22,15 +22,17 @@ const CategoryModal = ({ isOpen, onClose, category, onSave, categories }) => {
     });
   };
   useEffect(() => {
-    if (category) {
-      setFormData({
-        name: category.name || "",
-        description: category.description || "",
-        image: category.image || "",
-        parentCategory:
-          category.parentCategory?._id || category.parentCategory || "",
-      });
-    } else resetForm();
+    if (isOpen) {
+      if (category) {
+        setFormData({
+          name: category.name || "",
+          description: category.description || "",
+          image: category.image || "",
+          parentCategory:
+            category.parentCategory?._id || category.parentCategory || "",
+        });
+      } else resetForm();
+    }
   }, [category, isOpen]);
   const handleImageUpload = (e) => {
     const file = e.target.files[0];

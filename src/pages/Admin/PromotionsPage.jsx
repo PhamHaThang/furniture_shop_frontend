@@ -248,7 +248,10 @@ const PromotionsPage = () => {
       {/* Promotion Modal */}
       <PromotionModal
         isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={() => {
+          setModalOpen(false);
+          setSelectedPromotion(null);
+        }}
         promotion={selectedPromotion}
         onSave={fetchPromotions}
       />

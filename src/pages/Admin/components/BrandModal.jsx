@@ -20,14 +20,16 @@ const BrandModal = ({ isOpen, onClose, brand, onSave }) => {
     });
   };
   useEffect(() => {
-    if (brand) {
-      setFormData({
-        name: brand.name || "",
-        description: brand.description || "",
-        image: brand.image || "",
-      });
-    } else {
-      resetForm();
+    if (isOpen) {
+      if (brand) {
+        setFormData({
+          name: brand.name || "",
+          description: brand.description || "",
+          image: brand.image || "",
+        });
+      } else {
+        resetForm();
+      }
     }
   }, [brand, isOpen]);
   const handleImageUpload = async (e) => {

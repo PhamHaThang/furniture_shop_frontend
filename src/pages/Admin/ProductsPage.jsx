@@ -1,17 +1,17 @@
 import { ProductModal } from "./components";
 import { useState, useEffect, useCallback } from "react";
-import {
-  Search,
-  Plus,
-  Edit2,
-  Trash2,
-  RefreshCw,
-} from "lucide-react";
+import { Search, Plus, Edit2, Trash2, RefreshCw } from "lucide-react";
 import { brandService, categoryService, adminService } from "../../services";
 import { formatPrice } from "../../utils";
 import { PLACEHOLDER_IMAGE } from "../../config";
 import toast from "react-hot-toast";
-import { Button, ConfirmModal, Input, Select, Pagination } from "../../components";
+import {
+  Button,
+  ConfirmModal,
+  Input,
+  Select,
+  Pagination,
+} from "../../components";
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -259,7 +259,7 @@ const ProductsPage = () => {
                   <tr key={product._id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                        <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 shrink-0">
                           {product.images?.[0] ? (
                             <img
                               src={product.images[0]}
@@ -369,7 +369,9 @@ const ProductsPage = () => {
           <Pagination
             currentPage={pagination.page}
             totalPages={pagination.totalPages}
-            onPageChange={(page) => setPagination((prev) => ({ ...prev, page }))}
+            onPageChange={(page) =>
+              setPagination((prev) => ({ ...prev, page }))
+            }
           />
         </div>
       </div>
@@ -377,7 +379,10 @@ const ProductsPage = () => {
       {/* Modal */}
       <ProductModal
         isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={() => {
+          setModalOpen(false);
+          setSelectedProduct(null);
+        }}
         product={selectedProduct}
         onSave={handleSave}
         categories={categories}

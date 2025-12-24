@@ -48,19 +48,21 @@ const UserModal = ({ isOpen, onClose, user, onSave }) => {
     reader.readAsDataURL(file);
   };
   useEffect(() => {
-    if (user)
-      setFormData((prev) => ({
-        ...prev,
-        fullName: user.fullName || "",
-        email: user.email || "",
-        phone: user.phone || "",
-        role: user.role || "user",
-        avatar: user.avatar || "",
-        address: user.address || [],
-        password: "",
-      }));
-    else resetForm();
-  }, [user]);
+    if (isOpen) {
+      if (user)
+        setFormData((prev) => ({
+          ...prev,
+          fullName: user.fullName || "",
+          email: user.email || "",
+          phone: user.phone || "",
+          role: user.role || "user",
+          avatar: user.avatar || "",
+          address: user.address || [],
+          password: "",
+        }));
+      else resetForm();
+    }
+  }, [user, isOpen]);
 
   const handleAddAddress = () => {
     setFormData({
