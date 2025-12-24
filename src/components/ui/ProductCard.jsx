@@ -198,11 +198,11 @@ const ProductCard = ({ product, horizontal = false }) => {
         </div>
 
         {/* Add to Cart Button */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ">
           <button
             onClick={handleAddToCart}
             disabled={product.stock === 0 || isAddingToCart}
-            className="w-full py-2 bg-white text-char-900 font-medium rounded-lg hover:bg-primary-500 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer">
+            className="w-full py-2 bg-white text-char-900 font-medium rounded-lg hover:bg-primary-500 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed sm:flex items-center justify-center gap-2 cursor-pointer hidden">
             <ShoppingCart size={18} />
             {isAddingToCart
               ? "Đang thêm..."
