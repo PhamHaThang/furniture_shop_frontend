@@ -201,7 +201,6 @@ const CategoryModal = ({ isOpen, onClose, category, onSave, categories }) => {
           />
           <Select
             label="Danh mục cha"
-            placeholder=""
             options={[{ value: "", label: "Không có danh mục cha" }].concat(
               parentOptions.map((cat) => ({
                 value: cat._id,
@@ -209,8 +208,8 @@ const CategoryModal = ({ isOpen, onClose, category, onSave, categories }) => {
               }))
             )}
             value={formData.parentCategory}
-            onChange={(value) =>
-              setFormData({ ...formData, parentCategory: value })
+            onChange={(e) =>
+              setFormData({ ...formData, parentCategory: e.target.value })
             }
           />
 

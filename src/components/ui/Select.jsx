@@ -38,7 +38,7 @@ const Select = forwardRef(
               ${className}
             `}
             {...props}>
-            {placeholder && (
+            {placeholder && placeholder.trim() !== "" && (
               <option value="" disabled>
                 {placeholder}
               </option>
