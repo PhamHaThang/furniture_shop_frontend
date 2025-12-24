@@ -770,6 +770,7 @@ const ProductModal = ({
             <Button
               variant="primary"
               type="submit"
+              loading={loading || uploading}
               disabled={loading || uploading}
               className="flex-1 ">
               {loading || uploading

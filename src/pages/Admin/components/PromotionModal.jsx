@@ -224,7 +224,11 @@ const PromotionModal = ({ isOpen, onClose, promotion, onSave }) => {
               className="flex-1">
               Hủy
             </Button>
-            <Button type="submit" disabled={loading} className="flex-1">
+            <Button
+              type="submit"
+              disabled={loading}
+              className="flex-1"
+              loading={loading}>
               {loading ? "Đang xử lý..." : promotion ? "Cập nhật" : "Tạo mới"}
             </Button>
           </div>

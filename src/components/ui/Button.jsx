@@ -51,9 +51,9 @@ const Button = forwardRef(
         `}
         {...props}>
         {loading ? (
-          <Loader2 className="w-5 h-5 animate-spin mr-2 md:mr-0" />
+          <Loader2 className="w-5 h-5 animate-spin mr-2" />
         ) : leftIcon ? (
-          <span className="mr-2 md:mr-0">{leftIcon}</span>
+          <span className="mr-2">{leftIcon}</span>
         ) : null}
         {children}
         {rightIcon && !loading && <span className="ml-2">{rightIcon}</span>}
