@@ -76,7 +76,7 @@ const ReviewsPage = () => {
       <div className="bg-white rounded-xl shadow-sm p-4">
         <Input
           type="text"
-          placeholder="Tìm kiếm theo ID sản phẩm, ID người dùng..."
+          placeholder="Tìm kiếm đánh giá theo tên sản phẩm, tên người dùng..."
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);

@@ -122,7 +122,7 @@ const OrdersPage = () => {
           <div className="relative lg:col-span-2">
             <Input
               type="text"
-              placeholder="Tìm kiếm mã đơn, tên khách hàng..."
+              placeholder="Tìm kiếm đơn hàng theo mã đơn, tên khách hàng..."
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);

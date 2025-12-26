@@ -32,7 +32,7 @@ const ProductDetailPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [showModel3D, setShowModel3D] = useState(false);
   const [showAR, setShowAR] = useState(false);
-  const isInWishlist = wishlistItems.some((item) => item._id === product?._id);
+  const isInWishlist = wishlistItems?.some((item) => item._id === product?._id);
 
   // Fetch Product Details
   useEffect(() => {
