@@ -30,7 +30,7 @@ const HomePage = () => {
               limit: 4,
             }),
             brandService.getPopularBrands({
-              limit: 6,
+              limit: 3,
             }),
           ]);
         setFeaturedProducts(featuredRes.products || []);

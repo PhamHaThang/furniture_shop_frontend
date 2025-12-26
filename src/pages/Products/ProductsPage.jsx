@@ -59,10 +59,9 @@ const ProductsPage = () => {
       initialLimit: 12,
     });
 
+  // Sync only non-slug filters from URL
   useEffect(() => {
     const searchParam = searchParams.get("search") || "";
-    const categoryParam = searchParams.get("category") || "";
-    const brandParam = searchParams.get("brand") || "";
     const minPriceParam = searchParams.get("minPrice") || "";
     const maxPriceParam = searchParams.get("maxPrice") || "";
     const sortParam = searchParams.get("sort") || "newest";
@@ -70,8 +69,6 @@ const ProductsPage = () => {
     setFilters((prev) => ({
       ...prev,
       search: searchParam,
-      category: categoryParam,
-      brand: brandParam,
       minPrice: minPriceParam,
       maxPrice: maxPriceParam,
       sort: sortParam,
@@ -96,13 +93,35 @@ const ProductsPage = () => {
           const cat = categoriesList.find((c) => c.slug === slug);
           if (cat) {
             setCurrentCategory(cat);
-            setFilters((prev) => ({ ...prev, category: cat._id }));
+            setFilters((prev) => ({ ...prev, category: cat._id, brand: "" }));
+          } else {
+            // Redirect if category slug invalid
+            navigate("/not-found");
+            return;
           }
         } else if (slug && isBrandRoute) {
           const brand = brandsList.find((b) => b.slug === slug);
           if (brand) {
             setCurrentBrand(brand);
-            setFilters((prev) => ({ ...prev, brand: brand._id }));
+            setFilters((prev) => ({ ...prev, brand: brand._id, category: "" }));
+          } else {
+            navigate("/not-found");
+            return;
+          }
+        } else {
+          // Reset category/brand if no slug (on /products page)
+          setCurrentCategory(null);
+          setCurrentBrand(null);
+          const categoryParam = searchParams.get("category") || "";
+          const brandParam = searchParams.get("brand") || "";
+          if (categoryParam || brandParam) {
+            setFilters((prev) => ({
+              ...prev,
+              category: categoryParam,
+              brand: brandParam,
+            }));
+          } else {
+            setFilters((prev) => ({ ...prev, category: "", brand: "" }));
           }
         }
       } catch (error) {
@@ -110,12 +129,10 @@ const ProductsPage = () => {
       }
     };
     fetchCategoriesAndBrands();
-  }, [slug, isCategoryRoute, isBrandRoute]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug, isCategoryRoute, isBrandRoute, navigate]);
   // Fetch products
   useEffect(() => {
-    if (slug && isCategoryRoute && !filters.category) return;
-    if (slug && isBrandRoute && !filters.brand) return;
-
     const fetchProducts = async () => {
       setLoading(true);
       try {
@@ -141,6 +158,13 @@ const ProductsPage = () => {
         setLoading(false);
       }
     };
+
+    // Only fetch if we have the necessary filter data
+    // For category route, wait until we have the category ID
+    // For brand route, wait until we have the brand ID
+    if (isCategoryRoute && !filters.category) return;
+    if (isBrandRoute && !filters.brand) return;
+
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -157,8 +181,11 @@ const ProductsPage = () => {
     isBrandRoute,
   ]);
 
-  // Update URL when filters change
+  // Update URL when filters change (only on /products page, not on category/brand pages)
   useEffect(() => {
+    // Don't update URL params when on category/brand route
+    if (isCategoryRoute || isBrandRoute) return;
+
     const params = new URLSearchParams();
     if (filters.search) params.set("search", filters.search);
     if (filters.category) params.set("category", filters.category);
@@ -169,7 +196,7 @@ const ProductsPage = () => {
     if (page > 1) params.set("page", page.toString());
 
     setSearchParams(params, { replace: true });
-  }, [filters, page, setSearchParams]);
+  }, [filters, page, setSearchParams, isCategoryRoute, isBrandRoute]);
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
     setPage(1);
@@ -252,7 +279,7 @@ const ProductsPage = () => {
               {/* Mobile Filter Button */}
               {isMobile && (
                 <button
-                  className="border-beige-300 border rounded-lg p-2.5 text-char-600border-2 border-primary-500 text-primary-500 hover:bg-primary-100 focus:ring-primary-300"
+                  className="border-2 border-primary-500 text-primary-500 hover:bg-primary-100 focus:ring-primary-300 rounded-lg p-2.5"
                   onClick={() => setShowFilters(true)}>
                   <SlidersHorizontal size={18} />
                 </button>
