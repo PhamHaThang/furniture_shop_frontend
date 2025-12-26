@@ -77,7 +77,7 @@ const Header = () => {
           {/* Search Bar - Desktop */}
           <form
             onSubmit={handleSearch}
-            className="hidden md:flex items-center flex-1 max-w-sm mx-2">
+            className="hidden lg:flex items-center flex-1 max-w-sm mx-2">
             <div className="relative w-full">
               <input
                 type="text"
