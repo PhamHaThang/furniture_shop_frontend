@@ -25,6 +25,7 @@ export {
     AdminReviewsPage,
     AdminUsersPage,
     AdminMLAnalyticsPage,
+    AdminClustersPage,
 } from "./Admin";
 // Wishlist
 export { WishlistPage } from "./Wishlist";

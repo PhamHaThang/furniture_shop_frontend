@@ -148,6 +148,7 @@ export const ROUTES = {
     ADMIN_REVIEWS: "/admin/reviews",
     ADMIN_PROMOTIONS: "/admin/promotions",
     ADMIN_ML_ANALYTICS: "/admin/ml-analytics",
+    ADMIN_CLUSTERS: "/admin/clusters",
 };
 
 // Image Placeholder
@@ -207,9 +208,15 @@ export const ADMIN_SIDEBAR_LINKS = [
         icon: ChartNoAxesColumn,
         label: "ML Analytics",
     },
+    {
+        path: "/admin/clusters",
+        icon: CheckCircle,
+        label: "Clusters",
+    },
 ];
 // Time Range Options for Analytics
 export const TIME_RANGE_OPTIONS = [
+    { value: "all", label: "Tất cả (từ trước đến nay)" },
     { value: "7d", label: "7 ngày gần nhất" },
     { value: "30d", label: "30 ngày gần nhất" },
     { value: "90d", label: "90 ngày gần nhất" },
@@ -347,3 +354,45 @@ export const QUICK_ACTIONS_AI = [
     { label: "Giường ngủ", query: "giường" },
     { label: "Tủ quần áo", query: "tủ" },
 ];
+
+//  CLUSTER OPTIONS FOR ML ANALYTICS
+export const CLUSTER_OPTIONS = [
+    { value: "3", label: "3 cụm" },
+    { value: "4", label: "4 cụm" },
+    { value: "5", label: "5 cụm" },
+    { value: "6", label: "6 cụm" },
+];
+// Color map for order status chart
+export const ORDER_STATUS_COLOR_MAP = {
+    pending: "#F59E0B",
+    processing: "#0EA5E9",
+    shipped: "#4F46E5",
+    delivered: "#10B981",
+    cancelled: "#EF4444",
+    paid: "#14B8A6",
+    unpaid: "#9CA3AF",
+    failed: "#DC2626",
+    refunded: "#8B5CF6",
+};
+// Fallback colors for order status distribution chart
+export const ORDER_STATUS_FALLBACK_COLORS = [
+    "#4F46E5",
+    "#0EA5E9",
+    "#10B981",
+    "#F59E0B",
+    "#EF4444",
+    "#8B5CF6",
+];
+// Colors for rating distribution (1-5 stars)
+export const RATING_COLOR_MAP = {
+    5: "#10B981",
+    4: "#84CC16",
+    3: "#F59E0B",
+    2: "#F97316",
+    1: "#EF4444",
+};
+// Colors Sentiment color <reviews></reviews>
+export const SENTIMENT_COLOR_MAP = {
+    Good: "#10B981",
+    Bad: "#EF4444",
+};

@@ -3,7 +3,9 @@ import { toDateString } from "./format";
 export const getPresetDates = (range) => {
     const now = new Date();
     const end = toDateString(now);
-
+    if (range === "all") {
+        return { startDate: "", endDate: "" };
+    }
     if (range === "custom") {
         return { startDate: "", endDate: end };
     }
@@ -18,18 +20,55 @@ export const getPresetDates = (range) => {
     };
 };
 
-export const buildClusterStats = (clusterRows = []) => {
+export const buildClusterStats = (clusterData = []) => {
+    if (
+        clusterData &&
+        typeof clusterData === "object" &&
+        !Array.isArray(clusterData)
+    ) {
+        const summaries = Array.isArray(clusterData.cluster_summaries)
+            ? clusterData.cluster_summaries
+            : [];
+
+        if (summaries.length > 0) {
+            return summaries
+                .map((item) => ({
+                    cluster: Number(item.cluster),
+                    label: item.label || `Cluster ${item.cluster}`,
+                    count: Number(item.size) || 0,
+                    avgFeatures: item.avg_features || {},
+                }))
+                .sort((a, b) => a.cluster - b.cluster);
+        }
+    }
+
+    const clusterRows = Array.isArray(clusterData)
+        ? clusterData
+        : clusterData?.clusters || [];
     const clusterMap = {};
 
     clusterRows.forEach((item) => {
         const key = item.cluster;
         if (!clusterMap[key]) {
-            clusterMap[key] = 0;
+            clusterMap[key] = {
+                count: 0,
+                label: item.cluster_label || `Cluster ${key}`,
+                avgFeatures: item.features || {},
+            };
         }
-        clusterMap[key] += 1;
+        clusterMap[key].count += 1;
     });
 
     return Object.entries(clusterMap)
-        .map(([cluster, count]) => ({ cluster: Number(cluster), count }))
+        .map(([cluster, data]) => ({
+            cluster: Number(cluster),
+            label: data.label,
+            count: data.count,
+            avgFeatures: data.avgFeatures || {},
+        }))
         .sort((a, b) => a.cluster - b.cluster);
 };
+export const normalizeStatusKey = (value) =>
+    String(value || "")
+        .trim()
+        .toLowerCase();

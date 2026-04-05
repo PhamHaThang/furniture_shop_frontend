@@ -8,3 +8,4 @@ export { default as AdminOrderDetailPage } from "./OrderDetailPage";
 export { default as AdminReviewsPage } from "./ReviewsPage";
 export { default as AdminPromotionsPage } from "./PromotionsPage";
 export { default as AdminMLAnalyticsPage } from "./AdminMLAnalyticsPage";
+export { default as AdminClustersPage } from "./AdminClustersPage";

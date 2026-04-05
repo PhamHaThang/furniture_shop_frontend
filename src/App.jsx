@@ -36,6 +36,7 @@ import {
     AdminOrderDetailPage,
     AdminReviewsPage,
     AdminPromotionsPage,
+    AdminClustersPage,
 } from "./pages";
 import TestUI from "./TestUI";
 import { AdminMLAnalyticsPage } from "./pages/Admin";
@@ -85,6 +86,10 @@ const App = () => {
                         <Route
                             path="ml-analytics"
                             element={<AdminMLAnalyticsPage />}
+                        />
+                        <Route
+                            path="clusters"
+                            element={<AdminClustersPage />}
                         />
                     </Route>
                 </Route>
