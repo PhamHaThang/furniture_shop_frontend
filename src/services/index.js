@@ -12,3 +12,4 @@ export { wishlistService } from "./wishlistService";
 export { promotionService } from "./promotionService";
 export { uploadService } from "./uploadService";
 export { adminService } from "./adminService";
+export { recommendationService } from "./recommendationService";

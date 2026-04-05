@@ -4,10 +4,10 @@
  * @returns {string} Chuỗi tiền đã format
  */
 export const formatPrice = (amount) => {
-  return new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-  }).format(amount);
+    return new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+    }).format(amount);
 };
 
 /**
@@ -16,7 +16,7 @@ export const formatPrice = (amount) => {
  * @returns {string} Số đã format
  */
 export const formatNumber = (num) => {
-  return new Intl.NumberFormat("vi-VN").format(num);
+    return new Intl.NumberFormat("vi-VN").format(num);
 };
 
 /**
@@ -26,13 +26,13 @@ export const formatNumber = (num) => {
  * @returns {string} Ngày đã format
  */
 export const formatDate = (date, options = {}) => {
-  const defaultOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    ...options,
-  };
-  return new Date(date).toLocaleDateString("vi-VN", defaultOptions);
+    const defaultOptions = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        ...options,
+    };
+    return new Date(date).toLocaleDateString("vi-VN", defaultOptions);
 };
 
 /**
@@ -41,13 +41,13 @@ export const formatDate = (date, options = {}) => {
  * @returns {string} Ngày giờ đã format
  */
 export const formatDateTime = (date) => {
-  return new Date(date).toLocaleDateString("vi-VN", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+    return new Date(date).toLocaleDateString("vi-VN", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+    });
 };
 
 /**
@@ -56,17 +56,29 @@ export const formatDateTime = (date) => {
  * @returns {string} Thời gian relative
  */
 export const formatRelativeTime = (date) => {
-  const now = new Date();
-  const past = new Date(date);
-  const diffMs = now - past;
-  const diffSecs = Math.floor(diffMs / 1000);
-  const diffMins = Math.floor(diffSecs / 60);
-  const diffHours = Math.floor(diffMins / 60);
-  const diffDays = Math.floor(diffHours / 24);
+    const now = new Date();
+    const past = new Date(date);
+    const diffMs = now - past;
+    const diffSecs = Math.floor(diffMs / 1000);
+    const diffMins = Math.floor(diffSecs / 60);
+    const diffHours = Math.floor(diffMins / 60);
+    const diffDays = Math.floor(diffHours / 24);
 
-  if (diffSecs < 60) return "Vừa xong";
-  if (diffMins < 60) return `${diffMins} phút trước`;
-  if (diffHours < 24) return `${diffHours} giờ trước`;
-  if (diffDays < 7) return `${diffDays} ngày trước`;
-  return formatDate(date);
+    if (diffSecs < 60) return "Vừa xong";
+    if (diffMins < 60) return `${diffMins} phút trước`;
+    if (diffHours < 24) return `${diffHours} giờ trước`;
+    if (diffDays < 7) return `${diffDays} ngày trước`;
+    return formatDate(date);
+};
+
+/**
+ * Format ngày thành chuỗi YYYY-MM-DD
+ * @param {Date|string} date - Ngày
+ * @returns {string} Ngày đã format
+ */
+export const toDateString = (date) => {
+    const d = new Date(date);
+    const month = `${d.getMonth() + 1}`.padStart(2, "0");
+    const day = `${d.getDate()}`.padStart(2, "0");
+    return `${d.getFullYear()}-${month}-${day}`;
 };

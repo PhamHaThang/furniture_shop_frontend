@@ -1,9 +1,9 @@
 // Auth
 export {
-  LoginPage,
-  RegisterPage,
-  ForgotPasswordPage,
-  ResetPasswordPage,
+    LoginPage,
+    RegisterPage,
+    ForgotPasswordPage,
+    ResetPasswordPage,
 } from "./Auth";
 // Home
 export { HomePage } from "./Home";
@@ -15,15 +15,16 @@ export { BrandsPage } from "./Brands";
 export { CategoriesPage } from "./Categories";
 // Admin
 export {
-  AdminDashboardPage,
-  AdminBrandsPage,
-  AdminCategoriesPage,
-  AdminOrderDetailPage,
-  AdminOrdersPage,
-  AdminProductsPage,
-  AdminPromotionsPage,
-  AdminReviewsPage,
-  AdminUsersPage,
+    AdminDashboardPage,
+    AdminBrandsPage,
+    AdminCategoriesPage,
+    AdminOrderDetailPage,
+    AdminOrdersPage,
+    AdminProductsPage,
+    AdminPromotionsPage,
+    AdminReviewsPage,
+    AdminUsersPage,
+    AdminMLAnalyticsPage,
 } from "./Admin";
 // Wishlist
 export { WishlistPage } from "./Wishlist";
@@ -38,14 +39,14 @@ export { OrdersPage, OrderDetailPage } from "./Orders";
 export { ProfilePage } from "./Profile";
 // Static Pages
 export {
-  OrderTrackingPage,
-  GuidePage,
-  ReturnPolicyPage,
-  FAQPage,
-  AboutPage,
-  ContactPage,
-  TermsPage,
-  PrivacyPage,
+    OrderTrackingPage,
+    GuidePage,
+    ReturnPolicyPage,
+    FAQPage,
+    AboutPage,
+    ContactPage,
+    TermsPage,
+    PrivacyPage,
 } from "./Static";
 
 // Not Found

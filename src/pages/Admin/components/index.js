@@ -6,3 +6,4 @@ export { default as PromotionModal } from "./PromotionModal";
 export { default as BrandModal } from "./BrandModal";
 export { default as CategoryModal } from "./CategoryModal";
 export { default as ProductModal } from "./ProductModal";
+export { default as ClusterChart } from "./ClusterChart";
