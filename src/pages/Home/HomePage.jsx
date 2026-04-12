@@ -8,11 +8,9 @@ import {
     brandService,
     recommendationService,
 } from "../../services";
-import { useAuth } from "../../contexts";
 import { FEATURE_HIGHLIGHTS, ROUTES } from "../../config";
 
 const HomePage = () => {
-    const { isAuthenticated } = useAuth();
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
     const [bestSellers, setBestSellers] = useState([]);
@@ -23,9 +21,8 @@ const HomePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const personalizedPromise = isAuthenticated
-                    ? recommendationService.getHybridForMe(4)
-                    : Promise.resolve(null);
+                const personalizedPromise =
+                    recommendationService.getHybridForMe(4);
                 const [
                     featuredRes,
                     newRes,
@@ -69,7 +66,7 @@ const HomePage = () => {
             }
         };
         fetchData();
-    }, [isAuthenticated]);
+    }, []);
     if (loading) {
         return <LoadingScreen />;
     }
@@ -187,7 +184,7 @@ const HomePage = () => {
                     </div>
                 </section>
             )}
-            {isAuthenticated && personalizedProducts.length > 0 && (
+            {personalizedProducts.length > 0 && (
                 <section className="container mx-auto px-4">
                     <div className="flex items-center justify-between mb-8">
                         <h2 className="text-2xl lg:text-3xl font-bold text-char-900">
