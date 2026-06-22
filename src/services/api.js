@@ -36,8 +36,9 @@ api.interceptors.response.use(
     // Handle 401 Unauthorized - Token expired
     if (error.response?.status === 401) {
       const isPasswordChangeError = error.config?.url?.includes("/password");
+      const hasToken = !!localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
-      if (!isPasswordChangeError && window.location.pathname !== "/login") {
+      if (hasToken && !isPasswordChangeError && window.location.pathname !== "/login") {
         localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
         localStorage.removeItem(STORAGE_KEYS.USER);
         window.location.href = "/login";

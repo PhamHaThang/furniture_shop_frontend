@@ -9,8 +9,10 @@ import {
     recommendationService,
 } from "../../services";
 import { FEATURE_HIGHLIGHTS, ROUTES } from "../../config";
+import { useAuth } from "../../contexts";
 
 const HomePage = () => {
+    const { isAuthenticated } = useAuth();
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
     const [bestSellers, setBestSellers] = useState([]);
@@ -21,8 +23,9 @@ const HomePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const personalizedPromise =
-                    recommendationService.getHybridForMe(4);
+                const personalizedPromise = isAuthenticated
+                    ? recommendationService.getHybridForMe(4)
+                    : Promise.resolve({ recommendations: [] });
                 const [
                     featuredRes,
                     newRes,
